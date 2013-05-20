@@ -24,6 +24,8 @@
 		6F3AD544174A8BDF001BE473 /* tasks.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AD542174A8BDF001BE473 /* tasks.png */; };
 		6F3AD545174A8BDF001BE473 /* tasks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AD543174A8BDF001BE473 /* tasks@2x.png */; };
 		6F3AD547174AC667001BE473 /* heart2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AD546174AC667001BE473 /* heart2.png */; };
+		6F3AD54A174AD9A9001BE473 /* female.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AD548174AD9A8001BE473 /* female.png */; };
+		6F3AD54B174AD9A9001BE473 /* male.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AD549174AD9A8001BE473 /* male.png */; };
 		6F878875174932DB00B11B5B /* complete.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F878874174932DB00B11B5B /* complete.png */; };
 		6F878877174932FA00B11B5B /* inprogress.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F878876174932FA00B11B5B /* inprogress.png */; };
 		6F87887B174934CB00B11B5B /* coming.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F87887A174934CB00B11B5B /* coming.png */; };
@@ -91,6 +93,8 @@
 		6F3AD542174A8BDF001BE473 /* tasks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tasks.png; sourceTree = "<group>"; };
 		6F3AD543174A8BDF001BE473 /* tasks@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tasks@2x.png"; sourceTree = "<group>"; };
 		6F3AD546174AC667001BE473 /* heart2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart2.png; sourceTree = "<group>"; };
+		6F3AD548174AD9A8001BE473 /* female.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = female.png; sourceTree = "<group>"; };
+		6F3AD549174AD9A8001BE473 /* male.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = male.png; sourceTree = "<group>"; };
 		6F878874174932DB00B11B5B /* complete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = complete.png; sourceTree = "<group>"; };
 		6F878876174932FA00B11B5B /* inprogress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inprogress.png; sourceTree = "<group>"; };
 		6F87887A174934CB00B11B5B /* coming.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coming.png; sourceTree = "<group>"; };
@@ -253,6 +257,8 @@
 				6F878874174932DB00B11B5B /* complete.png */,
 				6F87888517496A8100B11B5B /* question.png */,
 				6F3AD546174AC667001BE473 /* heart2.png */,
+				6F3AD548174AD9A8001BE473 /* female.png */,
+				6F3AD549174AD9A8001BE473 /* male.png */,
 				6FA2E01E1746BDB100260EA6 /* Supporting Files */,
 				6FA2E05617480D1800260EA6 /* projmate.storyboard */,
 				6BDA99CF174AA3E500495703 /* User.h */,
@@ -363,6 +369,8 @@
 				6F3AD544174A8BDF001BE473 /* tasks.png in Resources */,
 				6F3AD545174A8BDF001BE473 /* tasks@2x.png in Resources */,
 				6F3AD547174AC667001BE473 /* heart2.png in Resources */,
+				6F3AD54A174AD9A9001BE473 /* female.png in Resources */,
+				6F3AD54B174AD9A9001BE473 /* male.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

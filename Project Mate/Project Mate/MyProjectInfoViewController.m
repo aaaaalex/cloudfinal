@@ -18,7 +18,7 @@
 @end
 
 @implementation MyProjectInfoViewController
-#warning Add global variable of userid
+
 - (id)initWithMyProject: (MyProject *)myProject
 {
     self = [super initWithStyle:UITableViewStyleGrouped];
@@ -65,11 +65,11 @@
 {
     switch(section) {
         case 0:
-            return 4;
+            return 3;
         case 1:
             return _currentProject.members.count;
         case 2:
-            return _currentProject.tasks.count == 0 ? 1 : _currentProject.tasks.count;
+            return 1;//_currentProject.tasks.count == 0 ? 1 : _currentProject.tasks.count;
         default:
             return 0;
     }
@@ -86,8 +86,6 @@
             
             [cell.textLabel setFont:[UIFont systemFontOfSize:12]];
             [cell.detailTextLabel setFont: [UIFont systemFontOfSize: 16]];
-//            [cell.detailTextLabel setLineBreakMode:NSLineBreakByCharWrapping];
-//            cell.detailTextLabel.numberOfLines = 0;
         }
         
         switch (indexPath.row) {
@@ -95,22 +93,18 @@
                 [cell.textLabel setText:@"Owner"];
                 [cell.detailTextLabel setText:_currentProject.owner];
                 break;
-           case 1:
-//                [cell.textLabel setText:@"Course"];
-//                [cell.detailTextLabel setText:_currentProject.course];
-                break;
-            case 2:
+            case 1:
                 [cell.textLabel setText:@"Deadline"];
                 formatter = [[NSDateFormatter alloc] init];
                 [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
                 [cell.detailTextLabel setText: [formatter stringFromDate:_currentProject.deadline]];
                 break;
-            case 3:
+            case 2:
                 [cell.textLabel setText:@"Description"];
                 [cell.detailTextLabel setText:_currentProject.description];
                 break;
         }
-        
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         return cell;
         
     } else if (indexPath.section == 1) {
@@ -120,8 +114,15 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"CellMember"];
         }
         
-        [cell.textLabel setText:[_currentProject.members objectAtIndex:indexPath.row]];
-        
+        [cell.textLabel setText:[NSString stringWithFormat:@"%@ %@",[[_currentProject.members objectAtIndex:indexPath.row] objectForKey:@"firstName"], [[_currentProject.members objectAtIndex:indexPath.row] objectForKey:@"lastName"]]];
+		
+		if([[[_currentProject.members objectAtIndex:indexPath.row] objectForKey:@"sex"] isEqualToString:@"male"])
+			[cell.imageView setImage:[self resizeImage:[UIImage imageNamed:@"male"]
+											 withWidth:27 withHeight:27]];
+		else
+			[cell.imageView setImage:[self resizeImage:[UIImage imageNamed:@"female"]
+											 withWidth:27 withHeight:27]];
+		[cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         return cell;
         
     } else {
@@ -133,15 +134,38 @@
             
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
-        
+/*
         if (_currentProject.tasks.count != 0) {
             // display first task
-        } else {
-            [cell.textLabel setText:@"None"];
-        }
+        } else {*/
+		[cell.textLabel setText:@"Tasks Details"];
+        
         
         return cell;
     }
+}
+
+- (UIImage*)resizeImage:(UIImage*)image withWidth:(int)width withHeight:(int)height
+{
+    CGSize newSize = CGSizeMake(width, height);
+    float widthRatio = newSize.width/image.size.width;
+    float heightRatio = newSize.height/image.size.height;
+	
+    if(widthRatio > heightRatio)
+    {
+        newSize=CGSizeMake(image.size.width*heightRatio,image.size.height*heightRatio);
+    }
+    else
+    {
+        newSize=CGSizeMake(image.size.width*widthRatio,image.size.height*widthRatio);
+    }
+	
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+	
+    return newImage;
 }
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
@@ -197,7 +221,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	if(indexPath.section == 2)
+		[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	else
+		[tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
@@ -209,7 +236,7 @@
         float progress = [_projectProgress floatValue];
         UIColor *barColor;
         UIProgressView *progressBar=[[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleDefault];
-        [progressBar setFrame:CGRectMake(35, 30, 250.0, 20)];
+        [progressBar setFrame:CGRectMake(10, 20, 300.0, 20)];
         if (progress < 0.3)
             barColor = [UIColor redColor];
         else if (progress < 0.6)
@@ -228,7 +255,7 @@
                                          resizableImageWithCapInsets:UIEdgeInsetsMake(18, 18, 18, 18)];
         
         UIButton *completeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        completeButton.frame = CGRectMake(35, 50, 250, 44);
+        completeButton.frame = CGRectMake(10, 50, 140, 44);
         [completeButton setTitle:@"Completed!" forState:UIControlStateNormal];
         [completeButton addTarget:self action:@selector(onProjectCompleted:) forControlEvents:UIControlEventTouchUpInside];
         [completeButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
@@ -243,7 +270,7 @@
                                          resizableImageWithCapInsets:UIEdgeInsetsMake(18, 18, 18, 18)];
         
         UIButton *favoriteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        favoriteButton.frame = CGRectMake(35, 100, 250, 44);
+        favoriteButton.frame = CGRectMake(170, 50, 140, 44);
         [favoriteButton addTarget:self action:@selector(onProjectMarkFavorite:) forControlEvents:UIControlEventTouchUpInside];
         [favoriteButton setBackgroundImage:buttonImage2 forState:UIControlStateNormal];
         [favoriteButton setBackgroundImage:buttonImageHighlight2 forState:UIControlStateHighlighted];
@@ -251,11 +278,6 @@
         [favoriteButton setTitleColor:[UIColor colorWithRed:150.0/256.0 green:150.0/256.0 blue:150.0/256.0 alpha:1.0] forState:UIControlStateHighlighted];
         
         [favoriteButton setTitle:@"Mark as favorite" forState:UIControlStateNormal];
-        [favoriteButton setTitle:@"Remove from favorite" forState:UIControlStateSelected];
-        
-        // need revise here!!!!!
-        // should set selected status based on the project
-        //[favoriteButton setSelected: ];
         
         [bottomView addSubview:completeButton];
         [bottomView addSubview:favoriteButton];
@@ -282,23 +304,33 @@
 // based on "completed tasks"/"total tasks"
 - (CGFloat)calculateProjectProgress
 {
-    return 0.2;
+	if(_currentProject.state == 0)
+    	return 0.2;
+	else if(_currentProject.state == 1)
+		return 1;
+	else
+		return 0.8;
 }
 
 // callback for complete button
 - (void)onProjectCompleted:(id)sender
 {
     // only when the project is truely completed
-    if ([_projectProgress floatValue] == 1.0) {
+    //if ([_projectProgress floatValue] == 1.0) {
     
-    }
+    //}
+    NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/addcomplete?projid=%d", _currentProject.proid];
+	NSURL *url = [NSURL URLWithString:urlstr];
+	[NSData dataWithContentsOfURL:url options:0 error:nil];
 }
 
 // callback for favorite button
 - (void)onProjectMarkFavorite:(id)sender
-{
-    UIButton *button = (UIButton *)sender;
-    [button setSelected:!button.selected];
+{	
+	MyAppDelegate *appdelegate = (MyAppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/addfavorite?userId=%@&projid=%d", appdelegate.userid, _currentProject.proid];
+	NSURL *url = [NSURL URLWithString:urlstr];
+	[NSData dataWithContentsOfURL:url options:0 error:nil];
 }
 
 // callback for edit button
