@@ -7,14 +7,14 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Project Mate/MyProjectTableViewController.m"
-         timestampString = "390730860.036064"
+         filePath = "Project Mate/MyTaskDetailedViewController.m"
+         timestampString = "390770112.786862"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "66"
-         endingLineNumber = "66"
-         landmarkName = "-refresh"
-         landmarkType = "5">
+         startingLineNumber = "20"
+         endingLineNumber = "20"
+         landmarkName = "@implementation MyTaskDetailedViewController"
+         landmarkType = "3">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

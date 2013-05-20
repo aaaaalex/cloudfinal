@@ -10,9 +10,11 @@
 #import "Task.h"
 #import "MyTaskDetailedViewController.h"
 #import "TaskCell.h"
+#import "MyAppDelegate.h"
+#import "User.h"
 
 @interface MyTasksTableViewController : UITableViewController
 @property (strong, nonatomic) NSString *userid;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cell;
-
+@property (strong, nonatomic) NSMutableArray *tasks;
 @end

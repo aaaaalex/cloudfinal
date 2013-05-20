@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "User.h"
 
 @interface Task : NSObject
 @property(strong, nonatomic) NSString *title;
@@ -17,5 +18,5 @@
 @property(strong, nonatomic) NSString *owner;
 @property(strong, nonatomic) NSString *parentProj;
 @property(strong, nonatomic) NSMutableArray *users;
-
+@property(strong, nonatomic) User *ownerinfo;
 @end
