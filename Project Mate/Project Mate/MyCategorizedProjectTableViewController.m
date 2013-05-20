@@ -321,8 +321,10 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+    MyProjectInfoViewController *dev = [[MyProjectInfoViewController alloc] initWithStyle:UITableViewStyleGrouped];
+#warning Need to add value pass
+    [self.navigationController pushViewController:dev animated:YES];
 }
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	return  70;

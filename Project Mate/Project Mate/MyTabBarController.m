@@ -24,9 +24,12 @@
 		MyInvitationViewController *invitationViewController = [[MyInvitationViewController alloc] initWithStyle:UITableViewStylePlain];
 		UINavigationController *navForTab3 = [[UINavigationController alloc] initWithRootViewController:invitationViewController];
 		
+        MyTasksTableViewController *taskViewController = [[MyTasksTableViewController alloc] init];
+        UINavigationController *navForTask = [[UINavigationController alloc] initWithRootViewController:taskViewController];
+        
         MySettingsViewController *settingsViewController = [[MySettingsViewController  alloc] init];
 		
-		self.viewControllers = @[navForTab1, navForTab3, settingsViewController];
+		self.viewControllers = @[navForTab1, navForTask,navForTab3, settingsViewController];
 		self.delegate = self;
 		self.navigationItem.hidesBackButton = YES;
     }

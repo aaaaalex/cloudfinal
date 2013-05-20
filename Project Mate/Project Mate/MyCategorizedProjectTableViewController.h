@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MyProject.h"
 #import "MyAppDelegate.h"
+#import "MyProjectInfoViewController.h"
 
 @interface MyCategorizedProjectTableViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 

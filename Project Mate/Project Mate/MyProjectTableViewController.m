@@ -64,8 +64,8 @@
 		project1.deadline = currentDate;
 		project1.state = 0;
 #warning should delete this hard code part
-    	[_recentProjects addObject:project1];
-		[_projectsOverview replaceObjectAtIndex:1 withObject:[NSNumber numberWithInt:19]];
+    	//[_recentProjects addObject:project1];
+		//[_projectsOverview replaceObjectAtIndex:1 withObject:[NSNumber numberWithInt:19]];
 		dispatch_async(dispatch_get_main_queue(), ^{
     		[self performSelector:@selector(updateTable) withObject:nil afterDelay:0];
 		});
@@ -74,6 +74,7 @@
 
 - (void)updateTable
 {
+    [self getProjectsOverview];
 	[self.tableView reloadData];
 	[self.refreshControl endRefreshing];
 }
@@ -121,6 +122,7 @@
     int fav = [[json objectForKey:@"favorite"] intValue];
     
     NSArray *recs = [json objectForKey:@"recents"];
+    [_recentProjects removeAllObjects];
     if(recs.count > 0){
         for(NSDictionary *rec in recs){
             MyProject *project = [[MyProject alloc] init];
@@ -138,6 +140,9 @@
     NSLog(@"ongoing => %d", ongoing);
     NSLog(@"upcoming => %d", upcoming);
     NSLog(@"fav => %d", fav);
+    [_projectsOverview replaceObjectAtIndex:0 withObject:[NSNumber numberWithInt:upcoming]];
+    [_projectsOverview replaceObjectAtIndex:1 withObject:[NSNumber numberWithInt:ongoing]];
+    [_projectsOverview replaceObjectAtIndex:2 withObject:[NSNumber numberWithInt:fav]];
     
 //    [_projectsOverview replaceObjectAtIndex:0 withObject:[NSNumber numberWithInt:12]];
 //    MyProject *project2 = [[MyProject alloc] init];
@@ -148,6 +153,7 @@
 //	project2.state = 2;
 //	[_recentProjects addObject:project2];
 }
+
 
 - (void)addButtonWasPressed:(id)sender
 {

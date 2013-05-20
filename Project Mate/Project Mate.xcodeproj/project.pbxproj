@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6BDA99B8174A818D00495703 /* blueButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BDA99B2174A818C00495703 /* blueButton.png */; };
+		6BDA99B9174A818D00495703 /* blueButtonHighlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BDA99B3174A818C00495703 /* blueButtonHighlight.png */; };
+		6BDA99BA174A818D00495703 /* MyProjectInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BDA99B5174A818C00495703 /* MyProjectInfoViewController.m */; };
+		6BDA99BB174A818D00495703 /* tanButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BDA99B6174A818C00495703 /* tanButton.png */; };
+		6BDA99BC174A818D00495703 /* tanButtonHighlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BDA99B7174A818C00495703 /* tanButtonHighlight.png */; };
+		6BDA99C8174A87C200495703 /* cellimg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BDA99BD174A87BF00495703 /* cellimg.png */; };
+		6BDA99C9174A87C200495703 /* cellimg2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BDA99BE174A87BF00495703 /* cellimg2.png */; };
+		6BDA99CA174A87C200495703 /* MyTaskDetailedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BDA99C0174A87C000495703 /* MyTaskDetailedViewController.m */; };
+		6BDA99CB174A87C200495703 /* MyTasksTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BDA99C2174A87C000495703 /* MyTasksTableViewController.m */; };
+		6BDA99CC174A87C200495703 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BDA99C4174A87C100495703 /* Task.m */; };
+		6BDA99CD174A87C200495703 /* TaskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BDA99C6174A87C100495703 /* TaskCell.m */; };
+		6BDA99CE174A87C200495703 /* TaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BDA99C7174A87C200495703 /* TaskCell.xib */; };
 		6F878875174932DB00B11B5B /* complete.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F878874174932DB00B11B5B /* complete.png */; };
 		6F878877174932FA00B11B5B /* inprogress.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F878876174932FA00B11B5B /* inprogress.png */; };
 		6F87887B174934CB00B11B5B /* coming.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F87887A174934CB00B11B5B /* coming.png */; };
@@ -50,6 +62,23 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6BDA99B2174A818C00495703 /* blueButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueButton.png; sourceTree = "<group>"; };
+		6BDA99B3174A818C00495703 /* blueButtonHighlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueButtonHighlight.png; sourceTree = "<group>"; };
+		6BDA99B4174A818C00495703 /* MyProjectInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyProjectInfoViewController.h; sourceTree = "<group>"; };
+		6BDA99B5174A818C00495703 /* MyProjectInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyProjectInfoViewController.m; sourceTree = "<group>"; };
+		6BDA99B6174A818C00495703 /* tanButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tanButton.png; sourceTree = "<group>"; };
+		6BDA99B7174A818C00495703 /* tanButtonHighlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tanButtonHighlight.png; sourceTree = "<group>"; };
+		6BDA99BD174A87BF00495703 /* cellimg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cellimg.png; sourceTree = "<group>"; };
+		6BDA99BE174A87BF00495703 /* cellimg2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cellimg2.png; sourceTree = "<group>"; };
+		6BDA99BF174A87C000495703 /* MyTaskDetailedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTaskDetailedViewController.h; sourceTree = "<group>"; };
+		6BDA99C0174A87C000495703 /* MyTaskDetailedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTaskDetailedViewController.m; sourceTree = "<group>"; };
+		6BDA99C1174A87C000495703 /* MyTasksTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTasksTableViewController.h; sourceTree = "<group>"; };
+		6BDA99C2174A87C000495703 /* MyTasksTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTasksTableViewController.m; sourceTree = "<group>"; };
+		6BDA99C3174A87C100495703 /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
+		6BDA99C4174A87C100495703 /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
+		6BDA99C5174A87C100495703 /* TaskCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskCell.h; sourceTree = "<group>"; };
+		6BDA99C6174A87C100495703 /* TaskCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskCell.m; sourceTree = "<group>"; };
+		6BDA99C7174A87C200495703 /* TaskCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskCell.xib; sourceTree = "<group>"; };
 		6F878874174932DB00B11B5B /* complete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = complete.png; sourceTree = "<group>"; };
 		6F878876174932FA00B11B5B /* inprogress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inprogress.png; sourceTree = "<group>"; };
 		6F87887A174934CB00B11B5B /* coming.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coming.png; sourceTree = "<group>"; };
@@ -153,6 +182,23 @@
 		6FA2E01D1746BDB100260EA6 /* Project Mate */ = {
 			isa = PBXGroup;
 			children = (
+				6BDA99BD174A87BF00495703 /* cellimg.png */,
+				6BDA99BE174A87BF00495703 /* cellimg2.png */,
+				6BDA99BF174A87C000495703 /* MyTaskDetailedViewController.h */,
+				6BDA99C0174A87C000495703 /* MyTaskDetailedViewController.m */,
+				6BDA99C1174A87C000495703 /* MyTasksTableViewController.h */,
+				6BDA99C2174A87C000495703 /* MyTasksTableViewController.m */,
+				6BDA99C3174A87C100495703 /* Task.h */,
+				6BDA99C4174A87C100495703 /* Task.m */,
+				6BDA99C5174A87C100495703 /* TaskCell.h */,
+				6BDA99C6174A87C100495703 /* TaskCell.m */,
+				6BDA99C7174A87C200495703 /* TaskCell.xib */,
+				6BDA99B2174A818C00495703 /* blueButton.png */,
+				6BDA99B3174A818C00495703 /* blueButtonHighlight.png */,
+				6BDA99B4174A818C00495703 /* MyProjectInfoViewController.h */,
+				6BDA99B5174A818C00495703 /* MyProjectInfoViewController.m */,
+				6BDA99B6174A818C00495703 /* tanButton.png */,
+				6BDA99B7174A818C00495703 /* tanButtonHighlight.png */,
 				6FA2E0261746BDB100260EA6 /* MyAppDelegate.h */,
 				6FA2E0271746BDB100260EA6 /* MyAppDelegate.m */,
 				6FA2E0371746BFCD00260EA6 /* MyLoginViewController.h */,
@@ -288,6 +334,13 @@
 				6F87888617496A8100B11B5B /* question.png in Resources */,
 				6F8788891749778F00B11B5B /* invitations.png in Resources */,
 				6F87888A1749778F00B11B5B /* invitations@2x.png in Resources */,
+				6BDA99B8174A818D00495703 /* blueButton.png in Resources */,
+				6BDA99B9174A818D00495703 /* blueButtonHighlight.png in Resources */,
+				6BDA99BB174A818D00495703 /* tanButton.png in Resources */,
+				6BDA99BC174A818D00495703 /* tanButtonHighlight.png in Resources */,
+				6BDA99C8174A87C200495703 /* cellimg.png in Resources */,
+				6BDA99C9174A87C200495703 /* cellimg2.png in Resources */,
+				6BDA99CE174A87C200495703 /* TaskCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +362,11 @@
 				6F87887E17493EDB00B11B5B /* MyCategorizedProjectTableViewController.m in Sources */,
 				6F87888117495DF400B11B5B /* MyCreateProjectViewController.m in Sources */,
 				6F878884174964CD00B11B5B /* MyInvitationViewController.m in Sources */,
+				6BDA99BA174A818D00495703 /* MyProjectInfoViewController.m in Sources */,
+				6BDA99CA174A87C200495703 /* MyTaskDetailedViewController.m in Sources */,
+				6BDA99CB174A87C200495703 /* MyTasksTableViewController.m in Sources */,
+				6BDA99CC174A87C200495703 /* Task.m in Sources */,
+				6BDA99CD174A87C200495703 /* TaskCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

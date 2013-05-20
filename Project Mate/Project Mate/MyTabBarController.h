@@ -10,6 +10,7 @@
 #import "MyProjectTableViewController.h"
 #import "MyInvitationViewController.h"
 #import "MySettingsViewController.h"
+#import "MyTasksTableViewController.h"
 
 @interface MyTabBarController : UITabBarController <UITabBarControllerDelegate>
 
