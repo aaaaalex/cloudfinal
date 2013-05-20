@@ -30,8 +30,7 @@
         self.navigationItem.title = _currentTask.title;
         
         // calculate project progress here
-        _projectProgress = [NSNumber numberWithFloat:[self calculateProjectProgress]];
-    }
+           }
     
     return self;
 }
@@ -40,6 +39,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
     
     UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc]
 										   initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
@@ -335,11 +335,12 @@
 // callback for edit button
 - (void)onProjectEdited:(id)sender
 {
-    MyCreateProjectViewController *createProjectViewController = [[MyCreateProjectViewController alloc] init];
+    MyTaskEditViewController *createProjectViewController = [[MyTaskEditViewController alloc] init];
 	
 	UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:createProjectViewController];
 	nav.navigationItem.hidesBackButton = NO;
-	
+	createProjectViewController.currTask = _currentTask;
+    NSLog(@"In this view (((***!!! deadline is => %@", _currentTask.deadline.description);
 	[self presentViewController:nav animated:YES completion:nil];
 }
 

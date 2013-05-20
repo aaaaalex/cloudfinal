@@ -13,7 +13,7 @@
 #define CELL_CONTENT_MARGIN 10.0f
 
 @interface MyTaskEditViewController ()
-
+@property (nonatomic, strong) NSString *the_new_deadline;
 @end
 
 @implementation MyTaskEditViewController
@@ -25,6 +25,7 @@
         // Custom initialization
 		[[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 		self.tableView.scrollEnabled = NO;
+        
     }
     return self;
 }
@@ -33,7 +34,9 @@
 {
     [super viewDidLoad];
     
-    self.title = @"New Project";
+    NSLog(@"%@", _currTask.deadline.description);
+    
+    self.title = @"Edit Task";
 	UIBarButtonItem *leftBarButtonItem  = [[UIBarButtonItem alloc]
 										   initWithTitle:@"Cancel"
 										   style:UIBarButtonItemStyleBordered
@@ -54,6 +57,14 @@
 	self.originalCenter = self.view.center;
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    NSDateFormatter *newdf = [[NSDateFormatter alloc] init];
+    [newdf setDateFormat:@"MM/dd/yyyy - HH:mm:ss"];
+    NSString *tmp = [newdf stringFromDate:_currTask.deadline];
+    _the_new_deadline = tmp;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -67,7 +78,48 @@
 
 - (void)doneButtonWasPressed:(id)sender
 {
-	
+    NSIndexPath *IndexPath0 = [NSIndexPath indexPathForRow:0 inSection:0];
+	UITextField *targetTextField0 = (UITextField *)[[self.tableView cellForRowAtIndexPath:IndexPath0] viewWithTag:2];
+    NSString *new_title = targetTextField0.text;
+    
+	NSIndexPath *IndexPath1 = [NSIndexPath indexPathForRow:2 inSection:0];
+	UITextField *targetTextField1 = (UITextField *)[[self.tableView cellForRowAtIndexPath:IndexPath1] viewWithTag:2];
+    NSString *new_desc = targetTextField1.text;
+	NSIndexPath *IndexPath2 = [NSIndexPath indexPathForRow:6 inSection:0];
+    if(new_desc == nil){
+        new_desc = _currTask.desc;
+    }
+    if(new_title == nil){
+        new_title = _currTask.title;
+    }
+    //New Deadline
+    NSString *urlstrtmp = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/editTask?taskid=%@&title=%@&descr=%@&status=0&deadline=%@", _currTask.taskid, new_title, new_desc, _the_new_deadline];
+    
+    NSString *urlstr = [urlstrtmp stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    NSLog(@"%@", urlstr);
+    NSURL *url = [NSURL URLWithString:urlstr];
+    
+    NSData *data = [NSData dataWithContentsOfURL: url options:0 error:nil];
+    NSDictionary *jsonroot = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    NSString *res = [jsonroot objectForKey:@"result"];
+    if([res isEqualToString:@"yes"])
+    {
+        UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Congrates"
+                                                            message:@"Modification on the task has been saved successfully"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [errorView show];
+
+    } else if ([res isEqualToString:@"no"]){
+        UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Alert"
+                                                            message:@"Modification on the task was not saved successfully"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [errorView show];
+    }
+    
 }
 
 #pragma mark - Table view data source
@@ -79,7 +131,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 12;
+    return 7;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -121,7 +173,7 @@
 			
 			if (indexPath.row == 0) {
 				UITextField *title = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 220, 20)];
-				title.placeholder = @"new project title";
+				title.placeholder = _currTask.title;
 				title.tag = 2;
 				title.autocorrectionType = UITextAutocorrectionTypeNo;
 				title.autocapitalizationType = YES;
@@ -132,7 +184,7 @@
 				cell.accessoryView = title;
 			} else if (indexPath.row == 2) {
 				UITextField *description = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 220, 20)];
-				description.placeholder = @"new project description";
+				description.placeholder = _currTask.desc;
 				description.tag = 2;
 				description.autocorrectionType = UITextAutocorrectionTypeNo;
 				description.autocapitalizationType = YES;
@@ -155,17 +207,17 @@
 			} else if (indexPath.row == 6) {
 				NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
 				[dateFormatter setDateFormat:@"yyyy-MM-dd, HH:mm"];
-				NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
-				
-				UILabel *starttime = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 220.0, 20)];
-				starttime.tag = 2;
-				starttime.font = [UIFont systemFontOfSize:15.0];
-				starttime.textAlignment = NSTextAlignmentLeft;
-				starttime.textColor = [UIColor grayColor];
-				starttime.backgroundColor = [UIColor clearColor];
-				starttime.text = dateString;
-				cell.accessoryView = starttime;
-			} else if (indexPath.row == 8) {
+				//NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+				NSString *dateString = [dateFormatter stringFromDate: _currTask.deadline];
+				UILabel *deadline = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 220.0, 20)];
+				deadline.tag = 2;
+				deadline.font = [UIFont systemFontOfSize:15.0];
+				deadline.textAlignment = NSTextAlignmentLeft;
+				deadline.textColor = [UIColor blackColor];
+				deadline.backgroundColor = [UIColor clearColor];
+				deadline.text = dateString;
+				cell.accessoryView = deadline;
+			} else if (indexPath.row == 6) {
 				NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
 				[dateFormatter setDateFormat:@"yyyy-MM-dd, HH:mm"];
 				NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
@@ -202,12 +254,13 @@
 		} else if(indexPath.row == 4) {
 			((UILabel *)[cell viewWithTag:1]).text = @"owner :";
 		} else if(indexPath.row == 6) {
-			((UILabel *)[cell viewWithTag:1]).text = @"starttime :";
+			((UILabel *)[cell viewWithTag:1]).text = @"deadline :";
 		} else if(indexPath.row == 8) {
 			((UILabel *)[cell viewWithTag:1]).text = @"deadline :";
-		} else if(indexPath.row == 10) {
-			((UILabel *)[cell viewWithTag:1]).text = @"members :";
 		}
+//        else if(indexPath.row == 10) {
+//			((UILabel *)[cell viewWithTag:1]).text = @"members :";
+//		}
 	}
     // Configure the cell...
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -221,7 +274,7 @@
 	[tableView deselectRowAtIndexPath:indexPath animated:NO];
 	[self.view endEditing:YES];
 	
-    if(indexPath.row == 8) {
+    if(indexPath.row == 6) {
 		
 		int y = self.originalCenter.y - 180;
 		
@@ -289,8 +342,17 @@
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateFormat:@"yyyy-MM-dd, HH:mm"];
 	NSString *dateString = [dateFormatter stringFromDate:_DatePicker.date];
-	
-	NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:8 inSection:0];
+    
+    NSDateFormatter *newdf = [[NSDateFormatter alloc] init];
+    [newdf setDateFormat:@"MM/dd/yyyy - HH:mm:ss"];
+    NSString *tmp = [newdf stringFromDate:_DatePicker.date];
+    //NSString *tmpp = [NSString stringWithFormat:@"%@ - 00:00", tmp];
+    
+    //_new_deadline = [tmpp stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    
+    _the_new_deadline = tmp;
+    
+	NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:6 inSection:0];
 	((UILabel *)[[self.tableView cellForRowAtIndexPath:selectedIndexPath] viewWithTag:2]).text = dateString;
     [_aac dismissWithClickedButtonIndex:0 animated:YES];
 	
