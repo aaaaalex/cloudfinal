@@ -117,6 +117,8 @@
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         [df setDateFormat:@"MM/dd/yyyy - HH:mm:ss"];
         NSDate *deadline = [df dateFromString:dlstr];
+        NSLog(@"!!!***!!!=== So the deadline is %@", deadline.description);
+        NSLog(@"!!!***!!!=== So the type is like %@", dlstr);
         task.deadline = deadline;
         task.parentProj = [NSString stringWithFormat:@"%d", [[jsontask objectForKey:@"parentProj"] intValue]];
         task.taskid = [jsontask objectForKey:@"tid"];
@@ -289,6 +291,7 @@
     
     MyTaskDetailedViewController *dev = [[MyTaskDetailedViewController alloc] init];
     dev.currentTask = [_tasks objectAtIndex:indexPath.row];
+    NSLog(@"***currtask's deadline is === %@", dev.currentTask.deadline.description);
     [self.navigationController pushViewController:dev animated:YES];
 }
 
