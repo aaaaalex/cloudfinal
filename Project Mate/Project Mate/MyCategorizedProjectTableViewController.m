@@ -81,19 +81,7 @@
 
 -(void)getProjects
 {
-#warning request
-	/*
-	 NSError *error = nil;
-	 NSURL *videoPlaylistURL = [NSURL URLWithString:@"http://gdata.youtube.com/feeds/api/playlists/PL61BC997C1C3002AD?alt=json&start-index=1&max-results=50"];
-	 NSData *videoData = [NSData dataWithContentsOfURL:videoPlaylistURL options:0 error:&error];
-	 if(error) {
-	 NSLog(@"Error on getting video data: %@", [error description]);
-	 }
-	 
-	 NSArray *videoJSON = [[[NSJSONSerialization JSONObjectWithData:videoData options:NSJSONReadingMutableLeaves error:&error] objectForKey:@"feed"] objectForKey:@"entry"];
-	 if(error) {
-	 NSLog(@"Error parsing JSON: %@", [error description]);
-	 }*/
+
     NSString *urlstr;
     if(_category == 0){
         urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/getupcomings?userId=%@", _userid];
@@ -129,34 +117,19 @@
     if(error){
         NSLog(@"ERROR 2 - %@", error.description);
     }
-    NSLog(@"**!!!!!!!!!Ready to get details");
-    for(NSDictionary *json in jsons){
-    MyProject *project = [[MyProject alloc] init];
-        NSLog(@"0. Ready to start");
-        project.title = [json objectForKey:@"title"];
-        NSLog(@"1.Got title");
-    project.state = [[json objectForKey:@"status"] intValue];
-        NSLog(@"2.Got status");
-    project.description = [json objectForKey:@"descr"];
-        NSLog(@"3.Got descr");
-    NSString *dlstr = [json objectForKey:@"deadline"];
-        NSLog(@"4.Got deadline");
-    NSDateFormatter *df = [[NSDateFormatter alloc] init];
-    [df setDateFormat:@"MM/dd/yyyy - HH:mm:ss"];
-    NSDate *deadline = [df dateFromString:dlstr];
-        NSLog(@"5.Set deadline");
-    project.deadline = deadline;
-    project.proid = [[json objectForKey:@"proid"] intValue];
-        NSLog(@"Got proid");
-        [_projects addObject:project];
     
-//    MyProject *project2 = [[MyProject alloc] init];
-//	project2.title = @"HW4 Memory Management";
-//	project2.description = @"This is an assignment about memory management in which we are about implement shared memory";
-//	NSDate *currentDate = [NSDate date];
-//	project2.deadline = currentDate;
-//	project2.state = 2;
-//	[_projects addObject:project2];
+	for(NSDictionary *json in jsons){
+    MyProject *project = [[MyProject alloc] init];
+        project.title = [json objectForKey:@"title"];
+    	project.state = [[json objectForKey:@"status"] intValue];
+        project.description = [json objectForKey:@"descr"];
+        NSString *dlstr = [json objectForKey:@"deadline"];
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    	[df setDateFormat:@"MM/dd/yyyy - HH:mm:ss"];
+	    NSDate *deadline = [df dateFromString:dlstr];
+        project.deadline = deadline;
+    	project.proid = [[json objectForKey:@"proid"] intValue];
+        [_projects addObject:project];
     }
 }
 
@@ -181,7 +154,7 @@
 		
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell2"];
 		
-		titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(40.0, 10.0, 235, 20.0)];
+		titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(50.0, 10.0, 225, 20.0)];
 		titleLabel.tag = 1;
 		titleLabel.font = [UIFont systemFontOfSize:18.0];
 		titleLabel.textAlignment = NSTextAlignmentLeft;
@@ -189,7 +162,7 @@
 		titleLabel.backgroundColor = [UIColor clearColor];
 		[cell.contentView addSubview:titleLabel];
 		
-		deadlineLabel = [[UILabel alloc] initWithFrame:CGRectMake(40.0, 30.0, 105.0, 15.0)];
+		deadlineLabel = [[UILabel alloc] initWithFrame:CGRectMake(50.0, 30.0, 105.0, 15.0)];
 		deadlineLabel.tag = 2;
 		deadlineLabel.font = [UIFont systemFontOfSize:12.0];
 		deadlineLabel.textAlignment = NSTextAlignmentLeft;
@@ -197,7 +170,7 @@
 		deadlineLabel.backgroundColor =[UIColor clearColor];
 		[cell.contentView addSubview:deadlineLabel];
 		
-		description = [[UILabel alloc] initWithFrame:CGRectMake(40.0, 45.0, 235, 15.0)];
+		description = [[UILabel alloc] initWithFrame:CGRectMake(50.0, 45.0, 225, 15.0)];
 		description.tag = 3;
 		description.font = [UIFont systemFontOfSize:12.0];
 		description.textAlignment = NSTextAlignmentLeft;
@@ -213,14 +186,17 @@
 		deadlineLabel.text = dateString;
 		description.text = [(MyProject *)[_projects objectAtIndex:indexPath.row] description];
 		
-		if([(MyProject *)[_projects objectAtIndex:indexPath.row] state] == 0)
+		if(_category == 0)
+			[cell.imageView setImage:[self resizeImage:[UIImage imageNamed:@"coming"]
+											 withWidth:27 withHeight:27]];
+		else if(_category == 1)
 			[cell.imageView setImage:[self resizeImage:[UIImage imageNamed:@"inprogress"]
 											 withWidth:27 withHeight:27]];
-		else if([(MyProject *)[_projects objectAtIndex:indexPath.row] state] == 1)
+		else if(_category == 2)
 			[cell.imageView setImage:[self resizeImage:[UIImage imageNamed:@"complete"]
 											 withWidth:27 withHeight:27]];
 		else
-			[cell.imageView setImage:[self resizeImage:[UIImage imageNamed:@"coming"]
+			[cell.imageView setImage:[self resizeImage:[UIImage imageNamed:@"heart2"]
 											 withWidth:27 withHeight:27]];
 		
 	} else {

@@ -16,6 +16,7 @@
 @property NSInteger category;
 @property (nonatomic, strong) NSMutableArray *projects;
 @property (nonatomic, strong) NSString *userid;
+
 - (id)initWithRequestCategory:(NSInteger)category;
 
 @end

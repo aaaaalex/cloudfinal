@@ -23,6 +23,7 @@
 		6BDA99D7174AB52B00495703 /* MyTaskEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BDA99D6174AB52A00495703 /* MyTaskEditViewController.m */; };
 		6F3AD544174A8BDF001BE473 /* tasks.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AD542174A8BDF001BE473 /* tasks.png */; };
 		6F3AD545174A8BDF001BE473 /* tasks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AD543174A8BDF001BE473 /* tasks@2x.png */; };
+		6F3AD547174AC667001BE473 /* heart2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AD546174AC667001BE473 /* heart2.png */; };
 		6F878875174932DB00B11B5B /* complete.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F878874174932DB00B11B5B /* complete.png */; };
 		6F878877174932FA00B11B5B /* inprogress.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F878876174932FA00B11B5B /* inprogress.png */; };
 		6F87887B174934CB00B11B5B /* coming.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F87887A174934CB00B11B5B /* coming.png */; };
@@ -89,6 +90,7 @@
 		6BDA99D6174AB52A00495703 /* MyTaskEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTaskEditViewController.m; sourceTree = "<group>"; };
 		6F3AD542174A8BDF001BE473 /* tasks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tasks.png; sourceTree = "<group>"; };
 		6F3AD543174A8BDF001BE473 /* tasks@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tasks@2x.png"; sourceTree = "<group>"; };
+		6F3AD546174AC667001BE473 /* heart2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart2.png; sourceTree = "<group>"; };
 		6F878874174932DB00B11B5B /* complete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = complete.png; sourceTree = "<group>"; };
 		6F878876174932FA00B11B5B /* inprogress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inprogress.png; sourceTree = "<group>"; };
 		6F87887A174934CB00B11B5B /* coming.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coming.png; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 				6F87887A174934CB00B11B5B /* coming.png */,
 				6F878874174932DB00B11B5B /* complete.png */,
 				6F87888517496A8100B11B5B /* question.png */,
+				6F3AD546174AC667001BE473 /* heart2.png */,
 				6FA2E01E1746BDB100260EA6 /* Supporting Files */,
 				6FA2E05617480D1800260EA6 /* projmate.storyboard */,
 				6BDA99CF174AA3E500495703 /* User.h */,
@@ -359,6 +362,7 @@
 				6BDA99CE174A87C200495703 /* TaskCell.xib in Resources */,
 				6F3AD544174A8BDF001BE473 /* tasks.png in Resources */,
 				6F3AD545174A8BDF001BE473 /* tasks@2x.png in Resources */,
+				6F3AD547174AC667001BE473 /* heart2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
