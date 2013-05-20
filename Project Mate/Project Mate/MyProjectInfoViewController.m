@@ -18,7 +18,7 @@
 @end
 
 @implementation MyProjectInfoViewController
-
+#warning Add global variable of userid
 - (id)initWithMyProject: (MyProject *)myProject
 {
     self = [super initWithStyle:UITableViewStyleGrouped];

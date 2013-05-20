@@ -57,15 +57,7 @@
 
 -(void)refresh {
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-		MyProject *project1 = [[MyProject alloc] init];
-		project1.title = @"Rubik's Cube Solver";
-		project1.description = @"This is a project that tries to solve a 3*3*3 cube.";
-		NSDate *currentDate = [NSDate date];
-		project1.deadline = currentDate;
-		project1.state = 0;
-#warning should delete this hard code part
-    	//[_recentProjects addObject:project1];
-		//[_projectsOverview replaceObjectAtIndex:1 withObject:[NSNumber numberWithInt:19]];
+		
 		dispatch_async(dispatch_get_main_queue(), ^{
     		[self performSelector:@selector(updateTable) withObject:nil afterDelay:0];
 		});
@@ -134,6 +126,7 @@
             NSDate *deadline = [df dateFromString:dlstr];
             project.deadline = deadline;
             project.state = [[rec objectForKey:@"status"] intValue];
+            project.owner = [rec objectForKey:@"owner"];
             [_recentProjects addObject:project];
         }
     }
@@ -152,6 +145,7 @@
 //	project2.deadline = currentDate;
 //	project2.state = 2;
 //	[_recentProjects addObject:project2];
+
 }
 
 
