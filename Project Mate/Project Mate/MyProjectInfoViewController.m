@@ -221,8 +221,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	if(indexPath.section == 2)
+	if(indexPath.section == 2){
 		[tableView deselectRowAtIndexPath:indexPath animated:YES];
+        MyProjTaskViewController *dev = [[MyProjTaskViewController alloc] init];
+        dev.currProj =  _currentProject;
+        [self.navigationController pushViewController:dev animated:YES];
+    }
 	else
 		[tableView deselectRowAtIndexPath:indexPath animated:NO];
 }

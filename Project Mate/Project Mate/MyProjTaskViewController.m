@@ -38,11 +38,25 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+	UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc]
+										   initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+										   target:self
+										   action:@selector(addButtonWasPressed:)];
+	[self.navigationItem setRightBarButtonItem:rightBarButtonItem];
     
+}
+
+-(void) addButtonWasPressed:(id)sender
+{
+    MyTaskCreateViewController *dev = [[MyTaskCreateViewController alloc] init];
+    _pid = [NSString stringWithFormat:@"%d", _currProj.proid];
+    dev.pid = _pid;
+    [self.navigationController pushViewController:dev animated:YES];
 }
 
 - (void) viewDidAppear:(BOOL)animated
 {
+    NSLog(@"Try to get tasks");
     NSString *proid = [NSString stringWithFormat:@"%d", _currProj.proid];
     _pid = proid;
     [self getAllTask];
@@ -51,7 +65,9 @@
 
 -(void)getAllTask
 {
+    NSLog(@"Try to get tasks222");
     NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/listprojecttasks?projid=%@", _pid];
+    NSLog(@"%@",urlstr);
     NSURL *url = [NSURL URLWithString:urlstr];
     NSData *data = [NSData dataWithContentsOfURL:url options:0 error:nil];
     NSDictionary *jsonroot = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];

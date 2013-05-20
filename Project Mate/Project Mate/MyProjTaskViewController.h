@@ -10,6 +10,7 @@
 #import "MyProject.h"
 #import "MyAppDelegate.h"
 #import "MyProjTaskDetailViewController.h"
+#import "MyTaskCreateViewController.h"
 @interface MyProjTaskViewController : UITableViewController
 @property (strong, nonatomic) NSString *pid;
 @property (strong, nonatomic) MyProject *currProj;
