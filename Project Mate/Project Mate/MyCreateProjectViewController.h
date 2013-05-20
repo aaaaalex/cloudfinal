@@ -18,4 +18,7 @@
 
 @property CGPoint originalCenter;
 
+@property (nonatomic, strong) NSDate *local_starttime;
+@property (nonatomic, strong) NSDate *local_deadline;
+
 @end

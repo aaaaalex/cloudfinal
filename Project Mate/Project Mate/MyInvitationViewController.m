@@ -19,6 +19,8 @@
     self = [super initWithStyle:style];
     if (self) {
         _invitations = [[NSMutableArray alloc] init];
+		_fname = [[NSMutableArray alloc] init];
+		_lname = [[NSMutableArray alloc] init];
 		
 		[[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 		
@@ -166,6 +168,9 @@
 			project.owner = [currentInvitation objectForKey:@"owner"];
             project.state = [[currentInvitation objectForKey:@"status"] intValue];
             [_invitations addObject:project];
+			
+			[_fname addObject:[currentInvitation objectForKey:@"firstName"]];
+			[_lname addObject:[currentInvitation objectForKey:@"lastName"]];
         }
     }
 }
@@ -252,7 +257,7 @@
     }
 	
 	((UILabel *)[cell viewWithTag:1]).text = ((MyProject *)[_invitations objectAtIndex:indexPath.row]).title;
-	((UILabel *)[cell viewWithTag:2]).text = [NSString stringWithFormat:@"%@ invited you to join the project \"%@\"", ((MyProject *)[_invitations objectAtIndex:indexPath.row]).owner,
+	((UILabel *)[cell viewWithTag:2]).text = [NSString stringWithFormat:@"%@ %@ invited you to join the project \"%@\"", [_fname objectAtIndex:indexPath.row], [_lname objectAtIndex:indexPath.row],
 		((MyProject *)[_invitations objectAtIndex:indexPath.row]).title];
 	((UILabel *)[cell viewWithTag:3]).text = [[((MyProject *)[_invitations objectAtIndex:indexPath.row]).starttime description] substringToIndex:10];
     
