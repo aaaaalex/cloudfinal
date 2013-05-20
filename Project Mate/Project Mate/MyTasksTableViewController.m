@@ -20,9 +20,10 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
-        self.title = NSLocalizedString(@"Deadlines", @"Deadlines");
-        //[self.navigationController setNavigationBarHidden:NO];
-        
+        self.title = NSLocalizedString(@"My Tasks", @"My Tasks");
+		self.tabBarItem.image = [UIImage imageNamed:@"tasks"];
+		
+        [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     }
     
     return self;

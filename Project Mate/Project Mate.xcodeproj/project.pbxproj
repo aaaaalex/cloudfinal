@@ -19,6 +19,8 @@
 		6BDA99CC174A87C200495703 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BDA99C4174A87C100495703 /* Task.m */; };
 		6BDA99CD174A87C200495703 /* TaskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BDA99C6174A87C100495703 /* TaskCell.m */; };
 		6BDA99CE174A87C200495703 /* TaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BDA99C7174A87C200495703 /* TaskCell.xib */; };
+		6F3AD544174A8BDF001BE473 /* tasks.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AD542174A8BDF001BE473 /* tasks.png */; };
+		6F3AD545174A8BDF001BE473 /* tasks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AD543174A8BDF001BE473 /* tasks@2x.png */; };
 		6F878875174932DB00B11B5B /* complete.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F878874174932DB00B11B5B /* complete.png */; };
 		6F878877174932FA00B11B5B /* inprogress.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F878876174932FA00B11B5B /* inprogress.png */; };
 		6F87887B174934CB00B11B5B /* coming.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F87887A174934CB00B11B5B /* coming.png */; };
@@ -79,6 +81,8 @@
 		6BDA99C5174A87C100495703 /* TaskCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskCell.h; sourceTree = "<group>"; };
 		6BDA99C6174A87C100495703 /* TaskCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskCell.m; sourceTree = "<group>"; };
 		6BDA99C7174A87C200495703 /* TaskCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskCell.xib; sourceTree = "<group>"; };
+		6F3AD542174A8BDF001BE473 /* tasks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tasks.png; sourceTree = "<group>"; };
+		6F3AD543174A8BDF001BE473 /* tasks@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tasks@2x.png"; sourceTree = "<group>"; };
 		6F878874174932DB00B11B5B /* complete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = complete.png; sourceTree = "<group>"; };
 		6F878876174932FA00B11B5B /* inprogress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inprogress.png; sourceTree = "<group>"; };
 		6F87887A174934CB00B11B5B /* coming.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coming.png; sourceTree = "<group>"; };
@@ -184,10 +188,6 @@
 			children = (
 				6BDA99BD174A87BF00495703 /* cellimg.png */,
 				6BDA99BE174A87BF00495703 /* cellimg2.png */,
-				6BDA99BF174A87C000495703 /* MyTaskDetailedViewController.h */,
-				6BDA99C0174A87C000495703 /* MyTaskDetailedViewController.m */,
-				6BDA99C1174A87C000495703 /* MyTasksTableViewController.h */,
-				6BDA99C2174A87C000495703 /* MyTasksTableViewController.m */,
 				6BDA99C3174A87C100495703 /* Task.h */,
 				6BDA99C4174A87C100495703 /* Task.m */,
 				6BDA99C5174A87C100495703 /* TaskCell.h */,
@@ -217,6 +217,10 @@
 				6F87888017495DF400B11B5B /* MyCreateProjectViewController.m */,
 				6FE35E921748D65000535DC3 /* MyProject.h */,
 				6FE35E931748D65000535DC3 /* MyProject.m */,
+				6BDA99BF174A87C000495703 /* MyTaskDetailedViewController.h */,
+				6BDA99C0174A87C000495703 /* MyTaskDetailedViewController.m */,
+				6BDA99C1174A87C000495703 /* MyTasksTableViewController.h */,
+				6BDA99C2174A87C000495703 /* MyTasksTableViewController.m */,
 				6F878883174964CD00B11B5B /* MyInvitationViewController.h */,
 				6F878882174964CD00B11B5B /* MyInvitationViewController.m */,
 				6FE35E781748760900535DC3 /* MySettingsViewController.h */,
@@ -226,6 +230,8 @@
 				6FE35E7D174876C000535DC3 /* red button.png */,
 				6FE35E8617488CA300535DC3 /* projects.png */,
 				6FE35E8717488CA300535DC3 /* projects@2x.png */,
+				6F3AD542174A8BDF001BE473 /* tasks.png */,
+				6F3AD543174A8BDF001BE473 /* tasks@2x.png */,
 				6FE35E821748880400535DC3 /* settings.png */,
 				6FE35E831748880400535DC3 /* settings@2x.png */,
 				6F8788871749778F00B11B5B /* invitations.png */,
@@ -341,6 +347,8 @@
 				6BDA99C8174A87C200495703 /* cellimg.png in Resources */,
 				6BDA99C9174A87C200495703 /* cellimg2.png in Resources */,
 				6BDA99CE174A87C200495703 /* TaskCell.xib in Resources */,
+				6F3AD544174A8BDF001BE473 /* tasks.png in Resources */,
+				6F3AD545174A8BDF001BE473 /* tasks@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
