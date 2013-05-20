@@ -365,7 +365,7 @@
 	NSString *urlstr;
 	MyAppDelegate *appdelegate = (MyAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
-	if(buttonIndex) {
+	if(!buttonIndex) {
 		urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/declineinv?userId=%@&projid=%@", appdelegate.userid, _tmpProjid];
 	} else {
 		urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/confirminv?userId=%@&projid=%@", appdelegate.userid, _tmpProjid];

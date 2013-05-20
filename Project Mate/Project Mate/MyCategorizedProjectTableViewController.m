@@ -54,13 +54,7 @@
 
 -(void)refresh {
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-		MyProject *project1 = [[MyProject alloc] init];
-		project1.title = @"Rubik's Cube Solver";
-		project1.description = @"This is a project that tries to solve a 3*3*3 cube.";
-		NSDate *currentDate = [NSDate date];
-		project1.deadline = currentDate;
-		project1.state = 0;
-    	[_projects addObject:project1];
+		[self getProjects];
 		dispatch_async(dispatch_get_main_queue(), ^{
     		[self performSelector:@selector(updateTable) withObject:nil afterDelay:0];
 		});
