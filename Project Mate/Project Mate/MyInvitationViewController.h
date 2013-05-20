@@ -17,5 +17,6 @@
 @property NSIndexPath *tmpIndexPath; //to fix the didSelectRowAtIndexPath overflow bug
 
 @property (nonatomic, strong) NSMutableArray *lname, *fname;
+@property (nonatomic, strong) NSString *tmpProjid;
 
 @end
