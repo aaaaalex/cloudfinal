@@ -19,12 +19,6 @@
     self = [super initWithStyle:style];
     if (self) {
         _invitations = [[NSMutableArray alloc] init];
-		MyProject *testitem = [[MyProject alloc] init];
-		testitem.title = @"Robot Vision";
-		testitem.owner = @"Tian Xia";
-		testitem.starttime = [NSDate date];
-		testitem.state = 0;
-		[_invitations addObject:testitem];
 		
 		[[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 		
@@ -47,6 +41,16 @@
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refreshControl;
+	
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self getInvitations];
+		dispatch_async(dispatch_get_main_queue(), ^{
+			if(_invitations.count)
+				[[self tabBarItem] setBadgeValue:[NSString stringWithFormat:@"%d", _invitations.count]];
+			else
+				[[self tabBarItem] setBadgeValue:nil];
+		});
+    });
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -54,7 +58,7 @@
 	[super viewWillAppear:animated];
 	
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self getProjects];
+        [self getInvitations];
 		dispatch_async(dispatch_get_main_queue(), ^{
 			if(_invitations.count) {
 				self.tableView.tableHeaderView = nil;
@@ -76,14 +80,6 @@
 
 -(void)refresh {
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-		MyProject *project1 = [[MyProject alloc] init];
-		project1.title = @"Rubik's Cube Solver";
-		project1.description = @"This is a project that tries to solve a 3*3*3 cube.";
-		NSDate *currentDate = [NSDate date];
-		project1.starttime = currentDate;
-		project1.owner = @"Angela";
-		project1.state = 0;
-    	[_invitations addObject:project1];
 		dispatch_async(dispatch_get_main_queue(), ^{
     		[self performSelector:@selector(updateTable) withObject:nil afterDelay:0];
 		});
@@ -97,9 +93,10 @@
 
 - (void)updateTable
 {
-	if(_invitations.count)
+	if(_invitations.count) {
+		[[self tabBarItem] setBadgeValue:[NSString stringWithFormat:@"%d", _invitations.count]];
 		self.tableView.tableHeaderView = nil;
-	else {
+	} else {
 		UILabel *message = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 398.0)];
 		message.text = @"You don't have new invitations now.";
 		message.font = [UIFont systemFontOfSize:14.0];
@@ -107,8 +104,8 @@
 		message.textColor = [UIColor grayColor];
 		message.backgroundColor = [UIColor clearColor];
 		self.tableView.tableHeaderView = message;
+		[[self tabBarItem] setBadgeValue:nil];
 	}
-	[[self tabBarItem] setBadgeValue:[NSString stringWithFormat:@"%d", _invitations.count]];
 	[self.tableView reloadData];
 	[self.refreshControl endRefreshing];
 }
@@ -135,29 +132,42 @@
 	[self.navigationItem setLeftBarButtonItem:leftBarButtonItem];
 }
 
--(void)getProjects
+-(void)getInvitations
 {
-#warning request
-	/*
-	 NSError *error = nil;
-	 NSURL *videoPlaylistURL = [NSURL URLWithString:@"http://gdata.youtube.com/feeds/api/playlists/PL61BC997C1C3002AD?alt=json&start-index=1&max-results=50"];
-	 NSData *videoData = [NSData dataWithContentsOfURL:videoPlaylistURL options:0 error:&error];
-	 if(error) {
-	 NSLog(@"Error on getting video data: %@", [error description]);
-	 }
-	 
-	 NSArray *videoJSON = [[[NSJSONSerialization JSONObjectWithData:videoData options:NSJSONReadingMutableLeaves error:&error] objectForKey:@"feed"] objectForKey:@"entry"];
-	 if(error) {
-	 NSLog(@"Error parsing JSON: %@", [error description]);
-	 }*/
-    MyProject *project2 = [[MyProject alloc] init];
-	project2.title = @"HW4 Memory Management";
-	project2.description = @"This is an assignment about memory management in which we are about implement shared memory";
-	NSDate *currentDate = [NSDate date];
-	project2.starttime = currentDate;
-	project2.owner = @"David";
-	project2.state = 2;
-	[_invitations addObject:project2];
+	MyAppDelegate *appdelegate = (MyAppDelegate *)[[UIApplication sharedApplication] delegate];
+	
+	NSError *error = nil;
+    
+    NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/getupcomings?userId=%@", appdelegate.userid];
+    NSURL *url = [NSURL URLWithString:urlstr];
+    NSData *data = [NSData dataWithContentsOfURL:url options: 0 error:&error];
+    if(error){
+        NSLog(@"Error => %@", error.description);
+    }
+    error = nil;
+    
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+    if(error){
+        NSLog(@"Error => %@", error.description);
+    }
+	
+	NSArray *currentInivations = [json objectForKey:@"upcomings"];
+    [_invitations removeAllObjects];
+    if(currentInivations.count > 0){
+        for(NSDictionary *currentInvitation in currentInivations){
+            MyProject *project = [[MyProject alloc] init];
+            project.title = [currentInvitation objectForKey:@"title"];
+            project.description = [currentInvitation objectForKey:@"descr"];
+            NSString *dlstr = [currentInvitation objectForKey:@"deadline"];
+            NSDateFormatter *df = [[NSDateFormatter alloc] init];
+            [df setDateFormat:@"MM/dd/yyyy - HH:mm:ss"];
+            NSDate *deadline = [df dateFromString:dlstr];
+            project.deadline = deadline;
+			project.owner = [currentInvitation objectForKey:@"owner"];
+            project.state = [[currentInvitation objectForKey:@"status"] intValue];
+            [_invitations addObject:project];
+        }
+    }
 }
 
 #pragma mark - Table view data source
