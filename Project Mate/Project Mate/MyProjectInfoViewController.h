@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MyProject.h"
+#import "MyAppDelegate.h"
 
 @interface MyProjectInfoViewController : UITableViewController
 

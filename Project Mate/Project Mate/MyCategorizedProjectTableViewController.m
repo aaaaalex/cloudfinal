@@ -123,6 +123,8 @@
 	    NSDate *deadline = [df dateFromString:dlstr];
         project.deadline = deadline;
     	project.proid = [[json objectForKey:@"proid"] intValue];
+		project.owner = [json objectForKey:@"owner"];
+		project.members = [[NSMutableArray alloc] initWithArray:[json objectForKey:@"members"]];
         [_projects addObject:project];
     }
 }
@@ -291,10 +293,10 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
-    MyProjectInfoViewController *dev = [[MyProjectInfoViewController alloc] initWithStyle:UITableViewStyleGrouped];
-#warning Need to add value pass
+    MyProjectInfoViewController *dev = [[MyProjectInfoViewController alloc] initWithMyProject:[_projects objectAtIndex:indexPath.row]];
     [self.navigationController pushViewController:dev animated:YES];
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	return  70;

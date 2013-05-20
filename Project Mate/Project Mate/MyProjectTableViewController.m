@@ -41,20 +41,25 @@
 	_projectsOverview = [[NSMutableArray alloc] initWithObjects:[NSNumber numberWithInt:0],[NSNumber numberWithInt:0],
 						 [NSNumber numberWithInt:0],[NSNumber numberWithInt:0],nil];
 	
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self getProjectsOverview];
-		dispatch_async(dispatch_get_main_queue(), ^{
-			[[self tableView] reloadData];
-		});
-    });
-	
 	UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refreshControl;
 
 }
 
--(void)refresh {
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self getProjectsOverview];
+		dispatch_async(dispatch_get_main_queue(), ^{
+			[[self tableView] reloadData];
+		});
+    });
+}
+
+- (void)refresh {
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
@@ -114,6 +119,7 @@
             project.state = [[rec objectForKey:@"status"] intValue];
             project.owner = [rec objectForKey:@"owner"];
 			project.proid = [[rec objectForKey:@"projid"] intValue];
+			project.members = [[NSMutableArray alloc] initWithArray:[rec objectForKey:@"members"]];
             [_recentProjects addObject:project];
         }
     }
@@ -272,16 +278,6 @@
 									[(MyProject *)[_recentProjects objectAtIndex:indexPath.row] deadline]];
 			deadlineLabel.text = dateString;
 			description.text = [(MyProject *)[_recentProjects objectAtIndex:indexPath.row] description];
-			
-			if([(MyProject *)[_recentProjects objectAtIndex:indexPath.row] state] == 0)
-				[cell.imageView setImage:[self resizeImage:[UIImage imageNamed:@"inprogress"]
-										  withWidth:27 withHeight:27]];
-			else if([(MyProject *)[_recentProjects objectAtIndex:indexPath.row] state] == 1)
-				[cell.imageView setImage:[self resizeImage:[UIImage imageNamed:@"complete"]
-										  withWidth:27 withHeight:27]];
-			else
-				[cell.imageView setImage:[self resizeImage:[UIImage imageNamed:@"coming"]
-										  withWidth:27 withHeight:27]];
 
 		} else {
 			((UILabel *)[cell.contentView viewWithTag:1]).text = [(MyProject *)[_recentProjects objectAtIndex:indexPath.row] title];
@@ -292,6 +288,16 @@
 			((UILabel *)[cell.contentView viewWithTag:2]).text = dateString;
 			((UILabel *)[cell.contentView viewWithTag:3]).text = [(MyProject *)[_recentProjects objectAtIndex:indexPath.row] description];
 		}
+		
+		if([(MyProject *)[_recentProjects objectAtIndex:indexPath.row] state] == 0)
+			[cell.imageView setImage:[self resizeImage:[UIImage imageNamed:@"inprogress"]
+											 withWidth:27 withHeight:27]];
+		else if([(MyProject *)[_recentProjects objectAtIndex:indexPath.row] state] == 1)
+			[cell.imageView setImage:[self resizeImage:[UIImage imageNamed:@"complete"]
+											 withWidth:27 withHeight:27]];
+		else
+			[cell.imageView setImage:[self resizeImage:[UIImage imageNamed:@"coming"]
+											 withWidth:27 withHeight:27]];
 		
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		return cell;
@@ -345,6 +351,9 @@
 	if(indexPath.section == 0) {
 		MyCategorizedProjectTableViewController *categorizedProjectTableViewController = [[MyCategorizedProjectTableViewController alloc] initWithRequestCategory:indexPath.row];
 		[self.navigationController pushViewController:categorizedProjectTableViewController animated:YES];
+	} else {
+		MyProjectInfoViewController *dev = [[MyProjectInfoViewController alloc] initWithMyProject:[_recentProjects objectAtIndex:indexPath.row]];
+		[self.navigationController pushViewController:dev animated:YES];
 	}
 }
 
