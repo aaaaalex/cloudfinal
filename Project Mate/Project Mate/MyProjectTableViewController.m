@@ -127,6 +127,7 @@
             project.deadline = deadline;
             project.state = [[rec objectForKey:@"status"] intValue];
             project.owner = [rec objectForKey:@"owner"];
+			project.proid = [[rec objectForKey:@"projid"] intValue];
             [_recentProjects addObject:project];
         }
     }

@@ -63,7 +63,158 @@
 
 - (void)doneButtonWasPressed:(id)sender
 {
+	NSIndexPath *IndexPath0 = [NSIndexPath indexPathForRow:0 inSection:0];
+	UITextField *targetTextField0 = (UITextField *)[[self.tableView cellForRowAtIndexPath:IndexPath0] viewWithTag:2];
+	NSIndexPath *IndexPath1 = [NSIndexPath indexPathForRow:2 inSection:0];
+	UITextField *targetTextField1 = (UITextField *)[[self.tableView cellForRowAtIndexPath:IndexPath1] viewWithTag:2];
+	NSIndexPath *IndexPath2 = [NSIndexPath indexPathForRow:8 inSection:0];
+	NSIndexPath *IndexPath3 = [NSIndexPath indexPathForRow:10 inSection:0];
+	UITextField *targetTextField3 = (UITextField *)[[self.tableView cellForRowAtIndexPath:IndexPath3] viewWithTag:2];
 	
+	[self.view endEditing:YES];
+	
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.3];
+	self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y - 42);
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationDidStopSelector:@selector(animationHasFinished:finished:context:)];
+	[UIView commitAnimations];
+	
+	if(targetTextField0.text == nil || [targetTextField0.text isEqualToString:@""]) {
+		[self shakeView:[self.tableView cellForRowAtIndexPath:IndexPath0]];
+		return;
+	}
+	
+	if(targetTextField1.text == nil || [targetTextField1.text isEqualToString:@""]) {
+		[self shakeView:[self.tableView cellForRowAtIndexPath:IndexPath1]];
+		return;
+	}
+	
+	if(_local_deadline == nil) {
+		[self shakeView:[self.tableView cellForRowAtIndexPath:IndexPath2]];
+		return;
+	}
+		
+	if(!([_local_starttime compare:_local_deadline] == NSOrderedAscending)) {
+		UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Error"
+															message:@"Deadline has already passed."
+														   delegate:nil
+												  cancelButtonTitle:@"OK"
+												  otherButtonTitles:nil];
+		[errorView show];
+		return;
+	}
+	
+	if(targetTextField3.text == nil || [targetTextField3.text isEqualToString:@""]) {
+		[self shakeView:[self.tableView cellForRowAtIndexPath:IndexPath3]];
+		return;
+	}
+	
+	NSArray *members = [targetTextField3.text componentsSeparatedByString: @","];
+	NSString *inexistenceList = @"";
+	MyAppDelegate *appdelegate = (MyAppDelegate *)[[UIApplication sharedApplication] delegate];
+	for(int i = 0; i < members.count; i++) {
+		
+		NSString *user = [members objectAtIndex:i];
+		
+		if([user isEqualToString:appdelegate.userid]) {
+			UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Error"
+																message:[NSString stringWithFormat:@"Do not contain yourself again in the members field."]
+															   delegate:nil
+													  cancelButtonTitle:@"OK"
+													  otherButtonTitles:nil];
+			[errorView show];
+			return;
+		}
+		
+		for(int j = i + 1; j < members.count; j++) {
+			if([[members objectAtIndex:j] isEqualToString:user]) {
+				UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Error"
+																	message:[NSString stringWithFormat:@"User %@ is included more than once", user]
+																   delegate:nil
+														  cancelButtonTitle:@"OK"
+														  otherButtonTitles:nil];
+				[errorView show];
+				return;
+			}
+		}
+		
+		NSError *error = nil;
+		NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/checkuser?userId=%@", user];
+		NSURL *url = [NSURL URLWithString:urlstr];
+		
+		
+		NSData *data = [NSData dataWithContentsOfURL:url options:0 error:&error];
+		if(error) {
+			NSLog(@"Error on getting JSON: %@", [error description]);
+		}
+		
+		NSDictionary *JSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+		if(error) {
+			NSLog(@"Error parsing JSON: %@", [error description]);
+		}
+
+		NSString *result = [JSON objectForKey:@"result"];
+		if([result isEqualToString:@"no"]) {
+			if([inexistenceList isEqualToString:@""])
+				inexistenceList = [NSString stringWithFormat:@"%@", user];
+			else
+				inexistenceList = [NSString stringWithFormat:@"%@, %@", inexistenceList, user];
+		}
+
+	}
+	
+	if(![inexistenceList isEqualToString:@""]) {
+		UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Error"
+															message:[NSString stringWithFormat:@"The following users do not exist: %@.", inexistenceList]
+														   delegate:nil
+												  cancelButtonTitle:@"OK"
+												  otherButtonTitles:nil];
+		[errorView show];
+		return;
+	}
+	
+	NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+	[dateFormatter setDateFormat:@"MM/dd/yyyy - HH:mm:ss"];
+	NSString *dateString = [dateFormatter stringFromDate:_local_deadline];
+	
+	NSError *error = nil;
+	NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/createproject?owner=%@&descr=%@&title=%@&deadline=%@&status=0&members=%@", appdelegate.userid, targetTextField1.text, targetTextField0.text, dateString, targetTextField3.text];
+	NSURL *url = [NSURL URLWithString:[urlstr stringByReplacingOccurrencesOfString:@" " withString:@"%20"]];
+	
+	NSLog(@"%@", [urlstr stringByReplacingOccurrencesOfString:@" " withString:@"%20"]);
+	NSData *data = [NSData dataWithContentsOfURL:url options:0 error:&error];
+	if(error) {
+		NSLog(@"Error on getting JSON: %@", [error description]);
+	}
+	
+	NSDictionary *JSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+	if(error) {
+		NSLog(@"Error parsing JSON: %@", [error description]);
+	}
+	
+	NSString *result = [JSON objectForKey:@"result"];
+	if([result isEqualToString:@"no"]) {
+		UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Error"
+															message:[NSString stringWithFormat:@"Fail to create project \"%@\".", targetTextField0.text]
+														   delegate:nil
+												  cancelButtonTitle:@"OK"
+												  otherButtonTitles:nil];
+		[errorView show];
+		return;
+	} else {
+		UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Sucess"
+															message:[NSString stringWithFormat:@"Project \"%@\" created sucessfully.", targetTextField0.text]
+														   delegate:self
+												  cancelButtonTitle:@"OK"
+												  otherButtonTitles:nil];
+		[errorView show];
+	}
+}
+
+- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Table view data source
@@ -151,7 +302,8 @@
 			} else if (indexPath.row == 6) {
 				NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
 				[dateFormatter setDateFormat:@"yyyy-MM-dd, HH:mm"];
-				NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+				_local_starttime = [NSDate date];
+				NSString *dateString = [dateFormatter stringFromDate:_local_starttime];
 				
 				UILabel *starttime = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 220.0, 20)];
 				starttime.tag = 2;
@@ -285,6 +437,7 @@
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateFormat:@"yyyy-MM-dd, HH:mm"];
 	NSString *dateString = [dateFormatter stringFromDate:_DatePicker.date];
+	_local_deadline = _DatePicker.date;
 	
 	NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:8 inSection:0];
 	((UILabel *)[[self.tableView cellForRowAtIndexPath:selectedIndexPath] viewWithTag:2]).text = dateString;
@@ -336,31 +489,17 @@
 	return YES;
 }
 
-/*
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-	if([string isEqualToString:@" "])
+	NSIndexPath *IndexPath = [NSIndexPath indexPathForRow:10 inSection:0];
+	UITextField *targetTextField = (UITextField *)[[self.tableView cellForRowAtIndexPath:IndexPath] viewWithTag:2];
+
+	if([string isEqualToString:@" "] && targetTextField == textField)
 		return NO;
 	
-	NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    [textField setText:newString];
-	if(_firstName.text.length == 0 || _lastName.text.length == 0 || _email.text.length == 0
-	   || _password1.text.length == 0 || _password2.text.length == 0 || _sex == nil) {
-		[_signUp setEnabled:NO];
-		[_signUp setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-	} else {
-		[_signUp setEnabled:YES];
-		[_signUp setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-	}
-	return NO;
-}*/
-/*
-- (BOOL)textFieldShouldClear:(UITextField *)textField
-{
-	[_signUp setEnabled:NO];
-	[_signUp setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
 	return YES;
-}*/
+}
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField
 {
