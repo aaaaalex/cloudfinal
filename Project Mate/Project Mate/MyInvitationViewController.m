@@ -95,6 +95,7 @@
 
 - (void)updateTable
 {
+	[self getInvitations];
 	if(_invitations.count) {
 		[[self tabBarItem] setBadgeValue:[NSString stringWithFormat:@"%d", _invitations.count]];
 		self.tableView.tableHeaderView = nil;
@@ -140,7 +141,7 @@
 	
 	NSError *error = nil;
     
-    NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/getupcomings?userId=%@", appdelegate.userid];
+    NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/showpendinginv?userId=%@", appdelegate.userid];
     NSURL *url = [NSURL URLWithString:urlstr];
     NSData *data = [NSData dataWithContentsOfURL:url options: 0 error:&error];
     if(error){
@@ -153,7 +154,7 @@
         NSLog(@"Error => %@", error.description);
     }
 	
-	NSArray *currentInivations = [json objectForKey:@"upcomings"];
+	NSArray *currentInivations = [json objectForKey:@"pendings"];
     [_invitations removeAllObjects];
     if(currentInivations.count > 0){
         for(NSDictionary *currentInvitation in currentInivations){
@@ -167,6 +168,7 @@
             project.deadline = deadline;
 			project.owner = [currentInvitation objectForKey:@"owner"];
             project.state = [[currentInvitation objectForKey:@"status"] intValue];
+			project.proid = [[currentInvitation objectForKey:@"projid"] intValue];
             [_invitations addObject:project];
 			
 			[_fname addObject:[currentInvitation objectForKey:@"firstName"]];
@@ -342,13 +344,23 @@
 {
 	[[self tableView] deselectRowAtIndexPath:indexPath animated:YES];
 	
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+	UITextField *targetTextField = (UITextField *)[[self.tableView cellForRowAtIndexPath:indexPath] viewWithTag:1];
+	
+    UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:targetTextField.text
+														message:@"Do you want to join this project?"
+													   delegate:self
+											  cancelButtonTitle:@"Reject"
+											  otherButtonTitles:@"OK", nil];
+	[errorView show];
+}
+
+- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	if(buttonIndex) {
+		
+	} else {
+		
+	}
 }
 
 @end

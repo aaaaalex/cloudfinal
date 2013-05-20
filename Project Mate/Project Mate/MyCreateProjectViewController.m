@@ -175,7 +175,7 @@
 	}
 	
 	NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-	[dateFormatter setDateFormat:@"yyyy/MM/dd - HH:mm:ss"];
+	[dateFormatter setDateFormat:@"MM/dd/yyyy - HH:mm:ss"];
 	NSString *dateString = [dateFormatter stringFromDate:_local_deadline];
 	
 	NSError *error = nil;
