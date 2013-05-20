@@ -168,7 +168,7 @@
             project.deadline = deadline;
 			project.owner = [currentInvitation objectForKey:@"owner"];
             project.state = [[currentInvitation objectForKey:@"status"] intValue];
-			project.proid = [[currentInvitation objectForKey:@"projid"] intValue];
+			project.proid = [[currentInvitation objectForKey:@"proid"] intValue];
             [_invitations addObject:project];
 			
 			[_fname addObject:[currentInvitation objectForKey:@"firstName"]];
@@ -281,11 +281,16 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	if (editingStyle == UITableViewCellEditingStyleDelete) {
+		
+		MyAppDelegate *appdelegate = (MyAppDelegate *)[[UIApplication sharedApplication] delegate];
+		NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/declineinv?userId=%@&projid=%d", appdelegate.userid, ((MyProject *)[_invitations objectAtIndex:indexPath.row]).proid];
+		NSURL *url = [NSURL URLWithString:urlstr];
+		[NSData dataWithContentsOfURL:url options:0 error:nil];
+		
         // Delete the row from the data source
         [_invitations removeObjectAtIndex: indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 		
-#warning reject request
 		
 		if(_invitations.count == 0) {
 			UILabel *message = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 398.0)];
@@ -345,22 +350,43 @@
 	[[self tableView] deselectRowAtIndexPath:indexPath animated:YES];
 	
 	UITextField *targetTextField = (UITextField *)[[self.tableView cellForRowAtIndexPath:indexPath] viewWithTag:1];
-	
+	_tmpProjid = [NSString stringWithFormat:@"%d", ((MyProject *)[_invitations objectAtIndex:indexPath.row]).proid];
     UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:targetTextField.text
 														message:@"Do you want to join this project?"
 													   delegate:self
 											  cancelButtonTitle:@"Reject"
 											  otherButtonTitles:@"OK", nil];
 	[errorView show];
+	[_invitations removeObjectAtIndex:indexPath.row];
 }
 
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	if(buttonIndex) {
-		
+	NSString *urlstr;
+	MyAppDelegate *appdelegate = (MyAppDelegate *)[[UIApplication sharedApplication] delegate];
+	
+	if(!buttonIndex) {
+		urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/declineinv?userId=%@&projid=%@", appdelegate.userid, _tmpProjid];
 	} else {
-		
+		urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/confirminv?userId=%@&projid=%@", appdelegate.userid, _tmpProjid];
 	}
+	NSURL *url = [NSURL URLWithString:urlstr];
+	[NSData dataWithContentsOfURL:url options:0 error:nil];
+	if(_invitations.count) {
+		self.tableView.tableHeaderView = nil;
+		[[self tabBarItem] setBadgeValue:[NSString stringWithFormat:@"%d", _invitations.count]];
+	}
+	else {
+		[[self tabBarItem] setBadgeValue:nil];
+		UILabel *message = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 398.0)];
+		message.text = @"You don't have new invitations now.";
+		message.font = [UIFont systemFontOfSize:14.0];
+		message.textAlignment = NSTextAlignmentCenter;
+		message.textColor = [UIColor grayColor];
+		message.backgroundColor = [UIColor clearColor];
+		self.tableView.tableHeaderView = message;
+	}
+	[self.tableView reloadData];
 }
 
 @end
