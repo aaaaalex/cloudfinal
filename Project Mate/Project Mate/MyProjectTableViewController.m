@@ -86,7 +86,7 @@
 
     NSError *error = nil;
     
-    NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/getprojectinfo?userId=%@", _userid];
+    NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinalfinal.appspot.com/getprojectinfo?userId=%@", _userid];
     NSURL *url = [NSURL URLWithString:urlstr];
     NSData *data = [NSData dataWithContentsOfURL:url options: 0 error:&error];
     if(error){

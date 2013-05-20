@@ -114,7 +114,7 @@
     }
     else {
     //New Deadline
-    NSString *urlstrtmp = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/createtask?owner=%@&descr=%@&title=%@&deadline=%@&status=0&parentProj=%@", _userid, new_desc,new_title, _the_new_deadline, _pid];
+    NSString *urlstrtmp = [NSString stringWithFormat:@"http://projectmatefinalfinal.appspot.com/createtask?owner=%@&descr=%@&title=%@&deadline=%@&status=0&parentProj=%@", _userid, new_desc,new_title, _the_new_deadline, _pid];
     
     NSString *urlstr = [urlstrtmp stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     NSLog(@"%@", urlstr);

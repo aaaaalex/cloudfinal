@@ -140,7 +140,7 @@
 		}
 		
 		NSError *error = nil;
-		NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/checkuser?userId=%@", user];
+		NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinalfinal.appspot.com/checkuser?userId=%@", user];
 		NSURL *url = [NSURL URLWithString:urlstr];
 		
 		
@@ -179,7 +179,7 @@
 	NSString *dateString = [dateFormatter stringFromDate:_local_deadline];
 	
 	NSError *error = nil;
-	NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/createproject?owner=%@&descr=%@&title=%@&deadline=%@&status=0&members=%@", appdelegate.userid, targetTextField1.text, targetTextField0.text, dateString, targetTextField3.text];
+	NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinalfinal.appspot.com/createproject?owner=%@&descr=%@&title=%@&deadline=%@&status=0&members=%@", appdelegate.userid, targetTextField1.text, targetTextField0.text, dateString, targetTextField3.text];
 	NSURL *url = [NSURL URLWithString:[urlstr stringByReplacingOccurrencesOfString:@" " withString:@"%20"]];
 	
 	NSData *data = [NSData dataWithContentsOfURL:url options:0 error:&error];

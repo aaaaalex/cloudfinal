@@ -78,13 +78,13 @@
 
     NSString *urlstr;
     if(_category == 0){
-        urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/getupcomings?userId=%@", _userid];
+        urlstr = [NSString stringWithFormat:@"http://projectmatefinalfinal.appspot.com/getupcomings?userId=%@", _userid];
     } else if(_category == 1){
-        urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/getongoings?userId=%@", _userid];
+        urlstr = [NSString stringWithFormat:@"http://projectmatefinalfinal.appspot.com/getongoings?userId=%@", _userid];
     } else if(_category == 2){
-        urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/getcompleteds?userId=%@", _userid];
+        urlstr = [NSString stringWithFormat:@"http://projectmatefinalfinal.appspot.com/getcompleteds?userId=%@", _userid];
     } else {
-        urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/getfavorites?userId=%@", _userid];
+        urlstr = [NSString stringWithFormat:@"http://projectmatefinalfinal.appspot.com/getfavorites?userId=%@", _userid];
     }
     NSURL *url = [NSURL URLWithString:urlstr];
     NSError *error = nil;

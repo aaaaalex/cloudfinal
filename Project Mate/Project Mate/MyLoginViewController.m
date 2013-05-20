@@ -98,7 +98,7 @@
 	[_Login setTitle:@"Logging In..." forState:UIControlStateNormal];
 	
 	NSError *error = nil;
-    NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/login?userId=%@&userPwd=%@", _userid, _pwd];
+    NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinalfinal.appspot.com/login?userId=%@&userPwd=%@", _userid, _pwd];
     NSLog(@"%@",urlstr);
 	//NSURL *url = [NSURL URLWithString:@"http://cloudprojectmate.appspot.com/login?userId=sdfs&userPwd=sdfs"];
 	

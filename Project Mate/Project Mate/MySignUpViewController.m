@@ -83,7 +83,7 @@
 	if([_password1.text isEqualToString:_password2.text]) {
 		
 		NSError *error = nil;
-		NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/signup?userId=%@&userPwd=%@&lastName=%@&firstName=%@&sex=%@", _email.text, _password1.text, _lastName.text, _firstName.text, _sex];
+		NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinalfinal.appspot.com/signup?userId=%@&userPwd=%@&lastName=%@&firstName=%@&sex=%@", _email.text, _password1.text, _lastName.text, _firstName.text, _sex];
 		NSLog(@"%@",urlstr);
 		
 		NSURL *url = [NSURL URLWithString:urlstr];

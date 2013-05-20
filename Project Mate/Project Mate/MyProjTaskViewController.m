@@ -66,7 +66,7 @@
 -(void)getAllTask
 {
     NSLog(@"Try to get tasks222");
-    NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/listprojecttasks?projid=%@", _pid];
+    NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinalfinal.appspot.com/listprojecttasks?projid=%@", _pid];
     NSLog(@"%@",urlstr);
     NSURL *url = [NSURL URLWithString:urlstr];
     NSData *data = [NSData dataWithContentsOfURL:url options:0 error:nil];

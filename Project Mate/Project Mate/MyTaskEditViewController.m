@@ -93,7 +93,7 @@
         new_title = _currTask.title;
     }
     //New Deadline
-    NSString *urlstrtmp = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/editTask?taskid=%@&title=%@&descr=%@&status=0&deadline=%@", _currTask.taskid, new_title, new_desc, _the_new_deadline];
+    NSString *urlstrtmp = [NSString stringWithFormat:@"http://projectmatefinalfinal.appspot.com/editTask?taskid=%@&title=%@&descr=%@&status=0&deadline=%@", _currTask.taskid, new_title, new_desc, _the_new_deadline];
     
     NSString *urlstr = [urlstrtmp stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     NSLog(@"%@", urlstr);

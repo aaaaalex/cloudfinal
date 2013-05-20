@@ -141,7 +141,7 @@
 	
 	NSError *error = nil;
     
-    NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/showpendinginv?userId=%@", appdelegate.userid];
+    NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinalfinal.appspot.com/showpendinginv?userId=%@", appdelegate.userid];
     NSURL *url = [NSURL URLWithString:urlstr];
     NSData *data = [NSData dataWithContentsOfURL:url options: 0 error:&error];
     if(error){
@@ -283,7 +283,7 @@
 	if (editingStyle == UITableViewCellEditingStyleDelete) {
 		
 		MyAppDelegate *appdelegate = (MyAppDelegate *)[[UIApplication sharedApplication] delegate];
-		NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/declineinv?userId=%@&projid=%d", appdelegate.userid, ((MyProject *)[_invitations objectAtIndex:indexPath.row]).proid];
+		NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinalfinal.appspot.com/declineinv?userId=%@&projid=%d", appdelegate.userid, ((MyProject *)[_invitations objectAtIndex:indexPath.row]).proid];
 		NSURL *url = [NSURL URLWithString:urlstr];
 		[NSData dataWithContentsOfURL:url options:0 error:nil];
 		
@@ -366,9 +366,9 @@
 	MyAppDelegate *appdelegate = (MyAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
 	if(!buttonIndex) {
-		urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/declineinv?userId=%@&projid=%@", appdelegate.userid, _tmpProjid];
+		urlstr = [NSString stringWithFormat:@"http://projectmatefinalfinal.appspot.com/declineinv?userId=%@&projid=%@", appdelegate.userid, _tmpProjid];
 	} else {
-		urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/confirminv?userId=%@&projid=%@", appdelegate.userid, _tmpProjid];
+		urlstr = [NSString stringWithFormat:@"http://projectmatefinalfinal.appspot.com/confirminv?userId=%@&projid=%@", appdelegate.userid, _tmpProjid];
 	}
 	NSURL *url = [NSURL URLWithString:urlstr];
 	[NSData dataWithContentsOfURL:url options:0 error:nil];

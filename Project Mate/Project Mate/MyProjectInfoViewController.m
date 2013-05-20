@@ -323,7 +323,7 @@
     //if ([_projectProgress floatValue] == 1.0) {
     
     //}
-    NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/addcomplete?projid=%d", _currentProject.proid];
+    NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinalfinal.appspot.com/addcomplete?projid=%d", _currentProject.proid];
 	NSURL *url = [NSURL URLWithString:urlstr];
 	[NSData dataWithContentsOfURL:url options:0 error:nil];
 }
@@ -332,7 +332,7 @@
 - (void)onProjectMarkFavorite:(id)sender
 {	
 	MyAppDelegate *appdelegate = (MyAppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinal.appspot.com/addfavorite?userId=%@&projid=%d", appdelegate.userid, _currentProject.proid];
+    NSString *urlstr = [NSString stringWithFormat:@"http://projectmatefinalfinal.appspot.com/addfavorite?userId=%@&projid=%d", appdelegate.userid, _currentProject.proid];
 	NSURL *url = [NSURL URLWithString:urlstr];
 	[NSData dataWithContentsOfURL:url options:0 error:nil];
 }
