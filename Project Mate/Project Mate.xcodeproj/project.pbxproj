@@ -227,6 +227,8 @@
 				6BDA99C2174A87C000495703 /* MyTasksTableViewController.m */,
 				6BDA99D2174AACB900495703 /* MyTaskDetailedViewController.h */,
 				6BDA99D3174AACB900495703 /* MyTaskDetailedViewController.m */,
+				6BDA99D5174AB52900495703 /* MyTaskEditViewController.h */,
+				6BDA99D6174AB52A00495703 /* MyTaskEditViewController.m */,
 				6F878883174964CD00B11B5B /* MyInvitationViewController.h */,
 				6F878882174964CD00B11B5B /* MyInvitationViewController.m */,
 				6FE35E781748760900535DC3 /* MySettingsViewController.h */,
@@ -254,8 +256,6 @@
 				6FA2E05617480D1800260EA6 /* projmate.storyboard */,
 				6BDA99CF174AA3E500495703 /* User.h */,
 				6BDA99D0174AA3E500495703 /* User.m */,
-				6BDA99D5174AB52900495703 /* MyTaskEditViewController.h */,
-				6BDA99D6174AB52A00495703 /* MyTaskEditViewController.m */,
 			);
 			path = "Project Mate";
 			sourceTree = "<group>";

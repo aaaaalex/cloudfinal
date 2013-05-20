@@ -335,7 +335,12 @@
 // callback for edit button
 - (void)onProjectEdited:(id)sender
 {
-    
+    MyCreateProjectViewController *createProjectViewController = [[MyCreateProjectViewController alloc] init];
+	
+	UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:createProjectViewController];
+	nav.navigationItem.hidesBackButton = NO;
+	
+	[self presentViewController:nav animated:YES completion:nil];
 }
 
 @end

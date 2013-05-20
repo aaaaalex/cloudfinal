@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Task.h"
+#import "MyTaskEditViewController.h"
 
 @interface MyTaskDetailedViewController : UITableViewController
 @property (nonatomic, strong) Task *currentTask;
