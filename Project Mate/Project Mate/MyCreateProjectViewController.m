@@ -75,7 +75,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 11;
+    return 12;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -107,51 +107,53 @@
 			[[[cell viewForBaselineLayout] layer] setBorderWidth:0.8];
 			[[[cell viewForBaselineLayout] layer] setMasksToBounds:YES];
 		
-			UILabel *mainLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 15.0, 90.0, 20.0)];
+			UILabel *mainLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 17.0, 80.0, 20.0)];
 			mainLabel.tag = 1;
-			mainLabel.font = [UIFont systemFontOfSize:15.0];
+			mainLabel.font = [UIFont systemFontOfSize:13.0];
 			mainLabel.textAlignment = NSTextAlignmentRight;
 			mainLabel.textColor = [UIColor grayColor];
 			mainLabel.backgroundColor = [UIColor clearColor];
 			[cell.contentView addSubview:mainLabel];
 			
 			if (indexPath.row == 0) {
-				UITextField *title = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 210, 21)];
+				UITextField *title = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 220, 20)];
 				title.placeholder = @"new project title";
 				title.tag = 2;
 				title.autocorrectionType = UITextAutocorrectionTypeNo;
 				title.autocapitalizationType = YES;
 				[title setClearButtonMode:UITextFieldViewModeWhileEditing];
 				title.returnKeyType = UIReturnKeyNext;
-				//title.delegate = self;
+				title.delegate = self;
 				title.enablesReturnKeyAutomatically = YES;
 				cell.accessoryView = title;
 			} else if (indexPath.row == 2) {
-				UITextField *description = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 210, 21)];
+				UITextField *description = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 220, 20)];
 				description.placeholder = @"new project description";
 				description.tag = 2;
 				description.autocorrectionType = UITextAutocorrectionTypeNo;
 				description.autocapitalizationType = YES;
 				[description setClearButtonMode:UITextFieldViewModeWhileEditing];
-				description.returnKeyType = UIReturnKeyNext;
-				//description.delegate = self;
+				description.returnKeyType = UIReturnKeyDone;
+				description.delegate = self;
 				description.enablesReturnKeyAutomatically = YES;
 				cell.accessoryView = description;
 			} else if (indexPath.row == 4) {
-				UILabel *owner = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 210.0, 21)];
+				MyAppDelegate *appdelegate = (MyAppDelegate *)[[UIApplication sharedApplication] delegate];
+				
+				UILabel *owner = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 220.0, 20)];
 				owner.tag = 2;
 				owner.font = [UIFont systemFontOfSize:15.0];
 				owner.textAlignment = NSTextAlignmentLeft;
 				owner.textColor = [UIColor grayColor];
 				owner.backgroundColor = [UIColor clearColor];
-				owner.text = @"David Beckham";
+				owner.text = [NSString stringWithFormat:@"%@ %@", appdelegate.userfname, appdelegate.userlname];
 				cell.accessoryView = owner;
 			} else if (indexPath.row == 6) {
 				NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
 				[dateFormatter setDateFormat:@"yyyy-MM-dd, HH:mm"];
 				NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
 				
-				UILabel *starttime = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 210.0, 21)];
+				UILabel *starttime = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 220.0, 20)];
 				starttime.tag = 2;
 				starttime.font = [UIFont systemFontOfSize:15.0];
 				starttime.textAlignment = NSTextAlignmentLeft;
@@ -164,7 +166,7 @@
 				[dateFormatter setDateFormat:@"yyyy-MM-dd, HH:mm"];
 				NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
 				
-				UILabel *deadline = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 210.0, 21)];
+				UILabel *deadline = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 220.0, 20)];
 				deadline.tag = 2;
 				deadline.font = [UIFont systemFontOfSize:15.0];
 				deadline.textAlignment = NSTextAlignmentLeft;
@@ -172,6 +174,17 @@
 				deadline.backgroundColor = [UIColor clearColor];
 				deadline.text = dateString;
 				cell.accessoryView = deadline;
+			} else if (indexPath.row == 10) {
+				UITextField *members = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 220, 21)];
+				members.placeholder = @"add members";
+				members.tag = 2;
+				members.autocorrectionType = UITextAutocorrectionTypeNo;
+				members.autocapitalizationType = NO;
+				[members setClearButtonMode:UITextFieldViewModeWhileEditing];
+				members.returnKeyType = UIReturnKeyDone;
+				members.delegate = self;
+				members.enablesReturnKeyAutomatically = YES;
+				cell.accessoryView = members;
 			}
 			
 		} else {
@@ -197,52 +210,22 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	[tableView deselectRowAtIndexPath:indexPath animated:NO];
+	[self.view endEditing:YES];
 	
     if(indexPath.row == 8) {
+		
+		int y = self.originalCenter.y - 180;
+		
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationDuration:0.3];
+		self.view.center = CGPointMake(self.originalCenter.x, y);
+		[UIView commitAnimations];
+		
 		_aac = [[UIActionSheet alloc] initWithTitle:@"\n\n"
 										   delegate:self
 								  cancelButtonTitle:nil
@@ -288,8 +271,6 @@
 		
 		[UIView commitAnimations];
 	} else {
-		[self.view endEditing:YES];
-		
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.3];
 		self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y - 42);
@@ -307,39 +288,55 @@
 	
 	NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:8 inSection:0];
 	((UILabel *)[[self.tableView cellForRowAtIndexPath:selectedIndexPath] viewWithTag:2]).text = dateString;
-	NSLog(@"%d %d", selectedIndexPath.section, selectedIndexPath.row);
     [_aac dismissWithClickedButtonIndex:0 animated:YES];
+	
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.3];
+	self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y - 42);
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationDidStopSelector:@selector(animationHasFinished:finished:context:)];
+	[UIView commitAnimations];
 }
 
 -(void)DatePickercancelClick:(id)sender
 {
     [_aac dismissWithClickedButtonIndex:0 animated:YES];
+	
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.3];
+	self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y - 42);
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationDidStopSelector:@selector(animationHasFinished:finished:context:)];
+	[UIView commitAnimations];
 }
 
 #pragma mark - Text field
-/*
+
 - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
 {
-	int y;
-	if(textField == _firstName)
-		y = self.originalCenter.y;
-	else if(textField == _lastName)
-		y = self.originalCenter.y - 50;
-	else if(textField == _email)
-		y = self.originalCenter.y - 100;
-	else if(textField == _password1)
-		y = self.originalCenter.y - 130;
-	else
-		y = self.originalCenter.y - 160;
 	
-	[UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.3];
-    self.view.center = CGPointMake(self.originalCenter.x, y);
-    [UIView commitAnimations];
+	NSIndexPath *IndexPath = [NSIndexPath indexPathForRow:10 inSection:0];
+	UITextField *targetTextField = (UITextField *)[[self.tableView cellForRowAtIndexPath:IndexPath] viewWithTag:2];	
+	int y = self.originalCenter.y - 125;
 	
+	if(textField == targetTextField)
+	{
+		[UIView beginAnimations:nil context:NULL];
+    	[UIView setAnimationDuration:0.3];
+    	self.view.center = CGPointMake(self.originalCenter.x, y);
+    	[UIView commitAnimations];
+	} else {
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationDuration:0.3];
+		self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y - 42);
+		[UIView setAnimationDelegate:self];
+		[UIView setAnimationDidStopSelector:@selector(animationHasFinished:finished:context:)];
+		[UIView commitAnimations];
+	}
 	return YES;
 }
 
+/*
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
 	if([string isEqualToString:@" "])
@@ -356,49 +353,42 @@
 		[_signUp setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
 	}
 	return NO;
-}
-
+}*/
+/*
 - (BOOL)textFieldShouldClear:(UITextField *)textField
 {
 	[_signUp setEnabled:NO];
 	[_signUp setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
 	return YES;
-}
+}*/
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField
 {
-	if (textField == _firstName) {
-		[_lastName becomeFirstResponder];
-	} else if (textField == _lastName) {
-		[_email becomeFirstResponder];
-	} else if (textField == _email) {
-		[_password1 becomeFirstResponder];
-	} else if (textField == _password1) {
-		[_password2 becomeFirstResponder];
-	} else {
-		if(_firstName.text.length == 0 || _lastName.text.length == 0) {
-			[UIView beginAnimations:nil context:NULL];
-			[UIView setAnimationDuration:0.3];
-			self.view.center = self.originalCenter;
-			[UIView commitAnimations];
-			
-			[self shakeView:_nameField];
-		} else if(_sex == nil) {
-			[UIView beginAnimations:nil context:NULL];
-			[UIView setAnimationDuration:0.3];
-			self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y - 100);
-			[UIView commitAnimations];
-			
-			[self shakeView:_gender];
-		}
-		else if(_email.text.length == 0 || _password1.text.length == 0)
-			[self shakeView:_accountField];
-		else
-			[self signUpPressed:0];
+	NSIndexPath *IndexPath0 = [NSIndexPath indexPathForRow:0 inSection:0];
+	UITextField *targetTextField0 = (UITextField *)[[self.tableView cellForRowAtIndexPath:IndexPath0] viewWithTag:2];
+	NSIndexPath *IndexPath1 = [NSIndexPath indexPathForRow:2 inSection:0];
+	UITextField *targetTextField1 = (UITextField *)[[self.tableView cellForRowAtIndexPath:IndexPath1] viewWithTag:2];
+	NSIndexPath *IndexPath2 = [NSIndexPath indexPathForRow:10 inSection:0];
+	UITextField *targetTextField2 = (UITextField *)[[self.tableView cellForRowAtIndexPath:IndexPath2] viewWithTag:2];
+	
+	if (textField == targetTextField0) {
+		[targetTextField1 becomeFirstResponder];
+	} else if (textField == targetTextField1) {
+		[self.view endEditing:YES];
+	} else if (textField == targetTextField2) {
+		[self.view endEditing:YES];
+		
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationDuration:0.3];
+		self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y - 42);
+		[UIView setAnimationDelegate:self];
+		[UIView setAnimationDidStopSelector:@selector(animationHasFinished:finished:context:)];
+		[UIView commitAnimations];
 	}
-    return YES;
+	
+	return YES;
 }
-*/
+
 #pragma mark - Shake a view
 
 - (void)shakeView:(UIView*)view
