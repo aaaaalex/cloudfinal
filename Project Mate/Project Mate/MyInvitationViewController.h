@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MyProject.h"
 #import <QuartzCore/QuartzCore.h>
+#import "MyAppDelegate.h"
 
 @interface MyInvitationViewController : UITableViewController
 
