@@ -21,6 +21,9 @@
 		6BDA99D1174AA3E500495703 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BDA99D0174AA3E500495703 /* User.m */; };
 		6BDA99D4174AACBA00495703 /* MyTaskDetailedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BDA99D3174AACB900495703 /* MyTaskDetailedViewController.m */; };
 		6BDA99D7174AB52B00495703 /* MyTaskEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BDA99D6174AB52A00495703 /* MyTaskEditViewController.m */; };
+		6BDA99DA174AD36500495703 /* MyProjTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BDA99D9174AD36400495703 /* MyProjTaskViewController.m */; };
+		6BDA99DD174AD6EC00495703 /* MyProjTaskDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BDA99DC174AD6EC00495703 /* MyProjTaskDetailViewController.m */; };
+		6BDA99E0174AD7BA00495703 /* MyTaskCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BDA99DF174AD7BA00495703 /* MyTaskCreateViewController.m */; };
 		6F3AD544174A8BDF001BE473 /* tasks.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AD542174A8BDF001BE473 /* tasks.png */; };
 		6F3AD545174A8BDF001BE473 /* tasks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AD543174A8BDF001BE473 /* tasks@2x.png */; };
 		6F3AD547174AC667001BE473 /* heart2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AD546174AC667001BE473 /* heart2.png */; };
@@ -88,6 +91,12 @@
 		6BDA99D3174AACB900495703 /* MyTaskDetailedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTaskDetailedViewController.m; sourceTree = "<group>"; };
 		6BDA99D5174AB52900495703 /* MyTaskEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTaskEditViewController.h; sourceTree = "<group>"; };
 		6BDA99D6174AB52A00495703 /* MyTaskEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTaskEditViewController.m; sourceTree = "<group>"; };
+		6BDA99D8174AD36400495703 /* MyProjTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyProjTaskViewController.h; sourceTree = "<group>"; };
+		6BDA99D9174AD36400495703 /* MyProjTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyProjTaskViewController.m; sourceTree = "<group>"; };
+		6BDA99DB174AD6EB00495703 /* MyProjTaskDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyProjTaskDetailViewController.h; sourceTree = "<group>"; };
+		6BDA99DC174AD6EC00495703 /* MyProjTaskDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyProjTaskDetailViewController.m; sourceTree = "<group>"; };
+		6BDA99DE174AD7B900495703 /* MyTaskCreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTaskCreateViewController.h; sourceTree = "<group>"; };
+		6BDA99DF174AD7BA00495703 /* MyTaskCreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTaskCreateViewController.m; sourceTree = "<group>"; };
 		6F3AD542174A8BDF001BE473 /* tasks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tasks.png; sourceTree = "<group>"; };
 		6F3AD543174A8BDF001BE473 /* tasks@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tasks@2x.png"; sourceTree = "<group>"; };
 		6F3AD546174AC667001BE473 /* heart2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart2.png; sourceTree = "<group>"; };
@@ -231,6 +240,12 @@
 				6BDA99D3174AACB900495703 /* MyTaskDetailedViewController.m */,
 				6BDA99D5174AB52900495703 /* MyTaskEditViewController.h */,
 				6BDA99D6174AB52A00495703 /* MyTaskEditViewController.m */,
+				6BDA99D8174AD36400495703 /* MyProjTaskViewController.h */,
+				6BDA99D9174AD36400495703 /* MyProjTaskViewController.m */,
+				6BDA99DB174AD6EB00495703 /* MyProjTaskDetailViewController.h */,
+				6BDA99DC174AD6EC00495703 /* MyProjTaskDetailViewController.m */,
+				6BDA99DE174AD7B900495703 /* MyTaskCreateViewController.h */,
+				6BDA99DF174AD7BA00495703 /* MyTaskCreateViewController.m */,
 				6F878883174964CD00B11B5B /* MyInvitationViewController.h */,
 				6F878882174964CD00B11B5B /* MyInvitationViewController.m */,
 				6FE35E781748760900535DC3 /* MySettingsViewController.h */,
@@ -391,6 +406,9 @@
 				6BDA99D1174AA3E500495703 /* User.m in Sources */,
 				6BDA99D4174AACBA00495703 /* MyTaskDetailedViewController.m in Sources */,
 				6BDA99D7174AB52B00495703 /* MyTaskEditViewController.m in Sources */,
+				6BDA99DA174AD36500495703 /* MyProjTaskViewController.m in Sources */,
+				6BDA99DD174AD6EC00495703 /* MyProjTaskDetailViewController.m in Sources */,
+				6BDA99E0174AD7BA00495703 /* MyTaskCreateViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
