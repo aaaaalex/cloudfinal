@@ -40,13 +40,7 @@
     
     NSLog(@"%@", _currTask.deadline.description);
     
-    self.title = @"Edit Task";
-	UIBarButtonItem *leftBarButtonItem  = [[UIBarButtonItem alloc]
-										   initWithTitle:@"Cancel"
-										   style:UIBarButtonItemStyleBordered
-										   target:self
-										   action:@selector(cancelButtonWasPressed:)];
-	//[self.navigationItem setLeftBarButtonItem:leftBarButtonItem];
+    self.title = @"Create Task";
 	
 	UIBarButtonItem *rightBarButtonItem  = [[UIBarButtonItem alloc]
                                             initWithBarButtonSystemItem:UIBarButtonSystemItemDone

@@ -12,7 +12,7 @@
 @property (nonatomic, strong) Task *currentTask;
 @property (nonatomic, strong) NSNumber *projectProgress;
 
-- (id) initWithMyTast: (Task *) currentTask;
+- (id) initWithMyTask: (Task *) currentTask;
 
 @end
 

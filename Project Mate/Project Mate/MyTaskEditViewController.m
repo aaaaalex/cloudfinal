@@ -330,7 +330,7 @@
 	} else {
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.3];
-		self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y - 42);
+		self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y - 62);
 		[UIView setAnimationDelegate:self];
 		[UIView setAnimationDidStopSelector:@selector(animationHasFinished:finished:context:)];
 		[UIView commitAnimations];
@@ -358,7 +358,7 @@
 	
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.3];
-	self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y - 42);
+	self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y - 62);
 	[UIView setAnimationDelegate:self];
 	[UIView setAnimationDidStopSelector:@selector(animationHasFinished:finished:context:)];
 	[UIView commitAnimations];
@@ -370,7 +370,7 @@
 	
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.3];
-	self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y - 42);
+	self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y - 62);
 	[UIView setAnimationDelegate:self];
 	[UIView setAnimationDidStopSelector:@selector(animationHasFinished:finished:context:)];
 	[UIView commitAnimations];
@@ -394,7 +394,7 @@
 	} else {
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.3];
-		self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y - 42);
+		self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y - 62);
 		[UIView setAnimationDelegate:self];
 		[UIView setAnimationDidStopSelector:@selector(animationHasFinished:finished:context:)];
 		[UIView commitAnimations];
@@ -446,7 +446,7 @@
 		
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.3];
-		self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y - 42);
+		self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y - 62);
 		[UIView setAnimationDelegate:self];
 		[UIView setAnimationDidStopSelector:@selector(animationHasFinished:finished:context:)];
 		[UIView commitAnimations];

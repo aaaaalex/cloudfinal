@@ -14,7 +14,6 @@
 
 @implementation MyProjTaskDetailViewController
 
-#warning Add global variable of userid
 - (id)initWithMyTask: (Task *)myTask
 {
     self = [super initWithStyle:UITableViewStyleGrouped];

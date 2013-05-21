@@ -22,8 +22,6 @@
         MyAppDelegate *appdelegate = (MyAppDelegate *)[[UIApplication sharedApplication] delegate];
         _userid = appdelegate.userid;
         
-        
-        
     }
     return self;
 }
@@ -33,6 +31,7 @@
     [super viewDidLoad];
     _alltasks = [[NSMutableArray alloc] init];
 
+	self.title = @"Task List";
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -133,7 +132,7 @@
     Task *curr = [_alltasks objectAtIndex:indexPath.row];
     NSLog(@"Now the title is >>>>> %@", curr.title);
     cell.textLabel.text = curr.title;
-    
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
@@ -188,9 +187,8 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
     //NSLog(@"We get into it");
-    MyProjTaskDetailViewController *dev = [[MyProjTaskDetailViewController alloc] init];
     Task *curr = [_alltasks objectAtIndex:indexPath.row];
-    dev.currentTask = curr;
+    MyProjTaskDetailViewController *dev = [[MyProjTaskDetailViewController alloc] initWithMyTask:curr];
     
     [self.navigationController pushViewController:dev animated:YES];
 }
