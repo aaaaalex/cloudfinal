@@ -10,7 +10,7 @@
 #import "Task.h"
 #import "MyTaskEditViewController.h"
 
-@interface MyTaskDetailedViewController : UITableViewController
+@interface MyTaskDetailedViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) Task *currentTask;
 @property (nonatomic, strong) NSNumber *projectProgress;
 

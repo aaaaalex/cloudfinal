@@ -289,9 +289,7 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
     
-    MyTaskDetailedViewController *dev = [[MyTaskDetailedViewController alloc] init];
-    dev.currentTask = [_tasks objectAtIndex:indexPath.row];
-    NSLog(@"***currtask's deadline is === %@", dev.currentTask.deadline.description);
+    MyTaskDetailedViewController *dev = [[MyTaskDetailedViewController alloc] initWithMyTask:[_tasks objectAtIndex:indexPath.row]];
     [self.navigationController pushViewController:dev animated:YES];
 }
 

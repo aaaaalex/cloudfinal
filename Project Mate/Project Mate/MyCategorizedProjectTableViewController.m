@@ -75,8 +75,8 @@
 
 -(void)getProjects
 {
-
     NSString *urlstr;
+	[_projects removeAllObjects];
     if(_category == 0){
         urlstr = [NSString stringWithFormat:@"http://projectmatefinalfinal.appspot.com/getupcomings?userId=%@", _userid];
     } else if(_category == 1){
@@ -105,7 +105,6 @@
         catchoice = @"favorites";
     }
 
-    
     NSDictionary *rootjsons = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
     NSArray *jsons = [rootjsons objectForKey:catchoice];
     if(error){

@@ -81,11 +81,6 @@
         
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"CellGeneral"];
-            
-            [cell.textLabel setFont:[UIFont systemFontOfSize:12]];
-            [cell.detailTextLabel setFont: [UIFont systemFontOfSize: 16]];
-            //            [cell.detailTextLabel setLineBreakMode:NSLineBreakByCharWrapping];
-            //            cell.detailTextLabel.numberOfLines = 0;
         }
         
 		[cell.textLabel setText:_currentTask.owner];
@@ -98,6 +93,7 @@
         
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"CellMember"];
+			
         }
         
         if(indexPath.row == 0){
@@ -139,43 +135,6 @@
     
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
-//{
-//    NSString *text;
-//    NSDateFormatter *formatter;
-//
-//    if(indexPath.section == 0) {
-//        switch (indexPath.row) {
-//            case 0:
-//                text = _currentProject.owner;
-//                break;
-//            case 1:
-//                text = _currentProject.course;
-//                break;
-//            case 2:
-//                formatter = [[NSDateFormatter alloc] init];
-//                [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
-//                text = [formatter stringFromDate:_currentProject.deadline];
-//                break;
-//            case 3:
-//                text = _currentProject.description;
-//                break;
-//        }
-//    } else if (indexPath.section == 1){
-//        text = [_currentProject.members objectAtIndex:indexPath.row];
-//    } else {
-//        text = [_currentProject.members objectAtIndex:0];
-//    }
-//
-//    CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
-//
-//    CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:NSLineBreakByCharWrapping];
-//
-//    CGFloat height = MAX(size.height, 44.0f);
-//
-//    return height + (CELL_CONTENT_MARGIN * 2);
-//}
-
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
 	switch(section) {
@@ -183,7 +142,6 @@
             return @"Owner";
         case 1:
             return @"Deadline";
-            //return @"";
         case 2:
             return @"Description";
         default:
@@ -199,13 +157,13 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     if(section == 2) {
-        UIView* bottomView = [[UIView alloc] initWithFrame:CGRectMake(0,0,300,150)];
+        UIView* bottomView = [[UIView alloc] initWithFrame:CGRectMake(0,0,300, 150)];
         
         // progress bar
         float progress = [_projectProgress floatValue];
         UIColor *barColor;
         UIProgressView *progressBar=[[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleDefault];
-        [progressBar setFrame:CGRectMake(35, 30, 300, 20)];
+        [progressBar setFrame:CGRectMake(10, 30, 300, 20)];
         if (progress < 0.3)
             barColor = [UIColor redColor];
         else if (progress < 0.6)
@@ -224,7 +182,7 @@
                                          resizableImageWithCapInsets:UIEdgeInsetsMake(18, 18, 18, 18)];
         
         UIButton *completeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        completeButton.frame = CGRectMake(35, 50, 300, 44);
+        completeButton.frame = CGRectMake(10, 50, 300, 44);
         [completeButton setTitle:@"Completed!" forState:UIControlStateNormal];
         [completeButton addTarget:self action:@selector(onProjectCompleted:) forControlEvents:UIControlEventTouchUpInside];
         [completeButton setBackgroundImage:buttonImage forState:UIControlStateNormal];

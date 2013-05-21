@@ -79,28 +79,9 @@
         
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"CellGeneral"];
-            
-            [cell.textLabel setFont:[UIFont systemFontOfSize:12]];
-            [cell.detailTextLabel setFont: [UIFont systemFontOfSize: 16]];
-            //            [cell.detailTextLabel setLineBreakMode:NSLineBreakByCharWrapping];
-            //            cell.detailTextLabel.numberOfLines = 0;
         }
         
-        switch (indexPath.row) {
-            case 0:
-                //[cell.textLabel setText:@"Owner"];
-                [cell.textLabel setText:_currentTask.owner];
-                break;
-                //case 1:
-                //                [cell.textLabel setText:@"Course"];
-                //                [cell.detailTextLabel setText:_currentProject.course];
-                //  break;
-                
-            case 2:
-                [cell.textLabel setText:@"Description"];
-                [cell.detailTextLabel setText:_currentTask.desc];
-                break;
-        }
+		[cell.textLabel setText:_currentTask.owner];
         
         return cell;
         
@@ -217,7 +198,7 @@
         float progress = [_projectProgress floatValue];
         UIColor *barColor;
         UIProgressView *progressBar=[[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleDefault];
-        [progressBar setFrame:CGRectMake(35, 30, 250.0, 20)];
+        [progressBar setFrame:CGRectMake(10, 30, 300, 20)];
         if (progress < 0.3)
             barColor = [UIColor redColor];
         else if (progress < 0.6)
@@ -236,7 +217,7 @@
                                          resizableImageWithCapInsets:UIEdgeInsetsMake(18, 18, 18, 18)];
         
         UIButton *completeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        completeButton.frame = CGRectMake(35, 50, 250, 44);
+        completeButton.frame = CGRectMake(10, 50, 300, 44);
         [completeButton setTitle:@"Completed!" forState:UIControlStateNormal];
         [completeButton addTarget:self action:@selector(onProjectCompleted:) forControlEvents:UIControlEventTouchUpInside];
         [completeButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
@@ -244,29 +225,7 @@
         [completeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [completeButton setTitleColor:[UIColor colorWithRed:150.0/256.0 green:150.0/256.0 blue:150.0/256.0 alpha:1.0] forState:UIControlStateHighlighted];
         
-        // button for setting favorite
-        UIImage *buttonImage2 = [[UIImage imageNamed:@"tanButton.png"]
-                                 resizableImageWithCapInsets:UIEdgeInsetsMake(18, 18, 18, 18)];
-        UIImage *buttonImageHighlight2 = [[UIImage imageNamed:@"tanButtonHighlight.png"]
-                                          resizableImageWithCapInsets:UIEdgeInsetsMake(18, 18, 18, 18)];
-        
-        UIButton *favoriteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        favoriteButton.frame = CGRectMake(35, 100, 250, 44);
-        [favoriteButton addTarget:self action:@selector(onProjectMarkFavorite:) forControlEvents:UIControlEventTouchUpInside];
-        [favoriteButton setBackgroundImage:buttonImage2 forState:UIControlStateNormal];
-        [favoriteButton setBackgroundImage:buttonImageHighlight2 forState:UIControlStateHighlighted];
-        [favoriteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [favoriteButton setTitleColor:[UIColor colorWithRed:150.0/256.0 green:150.0/256.0 blue:150.0/256.0 alpha:1.0] forState:UIControlStateHighlighted];
-        
-        [favoriteButton setTitle:@"Mark as favorite" forState:UIControlStateNormal];
-        [favoriteButton setTitle:@"Remove from favorite" forState:UIControlStateSelected];
-        
-        // need revise here!!!!!
-        // should set selected status based on the project
-        //[favoriteButton setSelected: ];
-        
         [bottomView addSubview:completeButton];
-        [bottomView addSubview:favoriteButton];
         [bottomView addSubview:progressBar];
         return bottomView;
     }
@@ -318,13 +277,6 @@
     if ([_projectProgress floatValue] == 1.0) {
         
     }
-}
-
-// callback for favorite button
-- (void)onProjectMarkFavorite:(id)sender
-{
-    UIButton *button = (UIButton *)sender;
-    [button setSelected:!button.selected];
 }
 
 // callback for edit button
