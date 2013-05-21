@@ -22,7 +22,7 @@
         MyAppDelegate *appdelegate = (MyAppDelegate *)[[UIApplication sharedApplication] delegate];
         _userid = appdelegate.userid;
         
-        _alltasks = [[NSMutableArray alloc] init];
+        
         
     }
     return self;
@@ -31,6 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _alltasks = [[NSMutableArray alloc] init];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -51,6 +52,7 @@
     MyTaskCreateViewController *dev = [[MyTaskCreateViewController alloc] init];
     _pid = [NSString stringWithFormat:@"%d", _currProj.proid];
     dev.pid = _pid;
+    dev.currproj = _currProj;
     [self.navigationController pushViewController:dev animated:YES];
 }
 
@@ -61,6 +63,12 @@
     _pid = proid;
     [self getAllTask];
     
+    NSLog(@"!!!The total number of tasksk => %d", [_alltasks count]);
+    if([_alltasks count] > 0){
+        Task *tmp = [_alltasks objectAtIndex:0];
+        NSLog(@"title => %@", tmp.title);
+    }
+    [self.tableView reloadData];
 }
 
 -(void)getAllTask
@@ -72,6 +80,7 @@
     NSData *data = [NSData dataWithContentsOfURL:url options:0 error:nil];
     NSDictionary *jsonroot = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
     NSArray *tasks = [jsonroot objectForKey:@"tasks"];
+    [_alltasks removeAllObjects];
     for(NSDictionary *task in tasks)
     {
         Task *tmp = [[Task alloc] init];
@@ -110,16 +119,19 @@
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
+    NSLog(@"!!***!!! the size of _alltasks is %d", [_alltasks count]);
     return [_alltasks count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
+    UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    if(cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
+    }
     // Configure the cell...
     Task *curr = [_alltasks objectAtIndex:indexPath.row];
+    NSLog(@"Now the title is >>>>> %@", curr.title);
     cell.textLabel.text = curr.title;
     
     return cell;
@@ -175,10 +187,12 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+    //NSLog(@"We get into it");
     MyProjTaskDetailViewController *dev = [[MyProjTaskDetailViewController alloc] init];
     Task *curr = [_alltasks objectAtIndex:indexPath.row];
     dev.currentTask = curr;
-    [dev.navigationController pushViewController:dev animated:YES];
+    
+    [self.navigationController pushViewController:dev animated:YES];
 }
 
 @end

@@ -10,6 +10,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "MyAppDelegate.h"
 #import "Task.h"
+#import "MyProjTaskViewController.h"
+#import "MyProject.h"
 
 @interface MyTaskCreateViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UITextFieldDelegate>
 @property (nonatomic, strong) NSString *pid;
@@ -19,4 +21,5 @@
 @property (nonatomic, strong) Task *currTask;
 @property CGPoint originalCenter;
 @property (nonatomic, strong) NSString *userid;
+@property (nonatomic, strong) MyProject *currproj;
 @end

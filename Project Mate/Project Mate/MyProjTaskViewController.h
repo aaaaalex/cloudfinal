@@ -11,7 +11,7 @@
 #import "MyAppDelegate.h"
 #import "MyProjTaskDetailViewController.h"
 #import "MyTaskCreateViewController.h"
-@interface MyProjTaskViewController : UITableViewController
+@interface MyProjTaskViewController : UITableViewController<UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSString *pid;
 @property (strong, nonatomic) MyProject *currProj;
 @property (strong, nonatomic) NSMutableArray *alltasks;

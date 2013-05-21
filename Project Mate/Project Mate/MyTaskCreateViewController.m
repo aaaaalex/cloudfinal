@@ -46,7 +46,7 @@
 										   style:UIBarButtonItemStyleBordered
 										   target:self
 										   action:@selector(cancelButtonWasPressed:)];
-	[self.navigationItem setLeftBarButtonItem:leftBarButtonItem];
+	//[self.navigationItem setLeftBarButtonItem:leftBarButtonItem];
 	
 	UIBarButtonItem *rightBarButtonItem  = [[UIBarButtonItem alloc]
                                             initWithBarButtonSystemItem:UIBarButtonSystemItemDone
@@ -131,6 +131,12 @@
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
         [errorView show];
+        MyProjTaskViewController *dev = [[MyProjTaskViewController alloc] init];
+        //UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:dev];
+
+        dev.currProj = _currproj;
+        [self.navigationController pushViewController:dev animated:YES];
+        
         
     } else if ([res isEqualToString:@"no"]){
         UIAlertView *errorView = [[UIAlertView alloc] initWithTitle:@"Alert"
