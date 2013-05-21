@@ -156,6 +156,8 @@
 	
 	NSArray *currentInivations = [json objectForKey:@"pendings"];
     [_invitations removeAllObjects];
+	[_lname removeAllObjects];
+	[_fname removeAllObjects];
     if(currentInivations.count > 0){
         for(NSDictionary *currentInvitation in currentInivations){
             MyProject *project = [[MyProject alloc] init];
@@ -289,6 +291,8 @@
 		
         // Delete the row from the data source
         [_invitations removeObjectAtIndex: indexPath.row];
+		[_fname removeObjectAtIndex: indexPath.row];
+		[_lname removeObjectAtIndex: indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 		
 		
@@ -358,6 +362,8 @@
 											  otherButtonTitles:@"OK", nil];
 	[errorView show];
 	[_invitations removeObjectAtIndex:indexPath.row];
+	[_lname removeObjectAtIndex:indexPath.row];
+	[_fname removeObjectAtIndex:indexPath.row];
 }
 
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
